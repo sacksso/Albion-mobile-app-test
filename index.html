@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#161b22"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="FishCalc"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" href="icons/icon-180.png"/>
+  <title>Albion Fish Calculator</title>
+  <style>
+    :root {
+      --bg:          #0d1117;
+      --surface:     #161b22;
+      --surface2:    #1c2333;
+      --surface3:    #21262d;
+      --border:      #30363d;
+      --border2:     #21262d;
+      --accent:      #f59e0b;
+      --accent-dim:  rgba(245,158,11,0.12);
+      --accent-glow: rgba(245,158,11,0.25);
+      --green:       #3fb950;
+      --green-dim:   rgba(63,185,80,0.12);
+      --red:         #f85149;
+      --red-dim:     rgba(248,81,73,0.12);
+      --blue:        #58a6ff;
+      --text:        #e6edf3;
+      --text-muted:  #8b949e;
+      --text-dim:    #484f58;
+      --radius:      10px;
+      --radius-sm:   6px;
+      --font:        'Segoe UI', system-ui, -apple-system, sans-serif;
+      --safe-top:    env(safe-area-inset-top, 0px);
+      --safe-bot:    env(safe-area-inset-bottom, 0px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100dvh;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ── TOP BAR ─────────────────────────────────────────────────────────── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(22,27,34,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: calc(var(--safe-top) + 10px) 16px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .topbar-icon {
+      width: 30px;
+      height: 30px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-glow);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .topbar-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .topbar-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .server-pill {
+      display: flex;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .server-pill button {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font);
+      padding: 4px 10px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .server-pill button.active {
+      background: var(--accent);
+      color: #0d1117;
+    }
+
+    /* ── LAYOUT ──────────────────────────────────────────────────────────── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 16px 16px calc(var(--safe-bot) + 32px); }
+
+    /* ── SUMMARY CARDS ───────────────────────────────────────────────────── */
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 480px) { .summary-row { grid-template-columns: 1fr 1fr; } }
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+    }
+    .summary-card.highlight {
+      border-color: var(--accent-glow);
+      background: var(--accent-dim);
+    }
+    .summary-card .sc-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .summary-card .sc-value {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+    .summary-card .sc-value.pos { color: var(--green); }
+    .summary-card .sc-value.neg { color: var(--red); }
+    .summary-card .sc-value.accent { color: var(--accent); }
+    .summary-card .sc-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── MAIN GRID ───────────────────────────────────────────────────────── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    @media (max-width: 700px) { .main-grid { grid-template-columns: 1fr; } }
+
+    /* ── PANEL (settings) ────────────────────────────────────────────────── */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 12px 16px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .panel-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+
+    /* ── FIELDS ──────────────────────────────────────────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .field select, .field input[type="number"] {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      padding: 8px 10px;
+      font-family: var(--font);
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+      transition: border-color .15s, box-shadow .15s;
+      -webkit-appearance: none;
+    }
+    .field select:focus, .field input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+    .field-hint { font-size: 11px; color: var(--text-dim); }
+
+    /* ── ROR SLIDER ──────────────────────────────────────────────────────── */
+    .ror-row { display: flex; align-items: center; gap: 8px; }
+    .ror-row input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      outline: none;
+    }
+    .ror-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+    .ror-display {
+      min-width: 46px;
+      text-align: right;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ── TOGGLES ─────────────────────────────────────────────────────────── */
+    .toggle-list { display: flex; flex-direction: column; gap: 1px; }
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border2);
+    }
+    .toggle-item:last-child { border-bottom: none; }
+    .toggle-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 38px;
+      height: 22px;
+      border-radius: 11px;
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: background .2s, border-color .2s;
+    }
+    .toggle-item input[type="checkbox"]::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: transform .2s, background .2s;
+    }
+    .toggle-item input[type="checkbox"]:checked {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+    .toggle-item input[type="checkbox"]:checked::after {
+      transform: translateX(16px);
+      background: var(--accent);
+    }
+    .toggle-text { flex: 1; }
+    .toggle-text b { font-size: 13px; font-weight: 600; display: block; }
+    .toggle-text small { font-size: 11px; color: var(--text-muted); }
+
+    /* ── REFRESH BTN ─────────────────────────────────────────────────────── */
+    .refresh-btn {
+      background: var(--accent);
+      color: #0d1117;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: var(--font);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: opacity .15s, transform .1s;
+    }
+    .refresh-btn:hover { opacity: .9; }
+    .refresh-btn:active { transform: scale(.97); }
+    .refresh-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .spin { animation: spin .7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── LAST UPDATED ────────────────────────────────────────────────────── */
+    .last-updated {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-dim);
+      padding-top: 4px;
+    }
+
+    /* ── TABLE CARD ──────────────────────────────────────────────────────── */
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .table-toolbar {
+      padding: 10px 14px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .table-toolbar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--text-muted);
+      flex: 1;
+    }
+    .filter-tabs { display: flex; gap: 4px; }
+    .filter-tab {
+      padding: 4px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .filter-tab.active {
+      background: var(--accent-dim);
+      border-color: var(--accent-glow);
+      color: var(--accent);
+    }
+
+    /* sort buttons in header */
+    .sort-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 10px;
+      padding: 0 2px; vertical-align: middle;
+    }
+    .sort-btn.asc::after  { content: ' ▲'; }
+    .sort-btn.desc::after { content: ' ▼'; }
+
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      text-align: left;
+      padding: 9px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+    thead th:hover { color: var(--text); }
+    thead th.sorted { color: var(--accent); }
+
+    tbody tr { border-bottom: 1px solid var(--border2); transition: background .1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr.data-row { cursor: pointer; }
+    tbody tr.data-row:hover { background: var(--surface2); }
+    tbody tr.data-row:active { background: var(--surface3); }
+    tbody tr.data-row.selected { background: var(--accent-dim); }
+    tbody tr.section-hdr td {
+      background: var(--surface2);
+      padding: 5px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody td { padding: 9px 12px; vertical-align: middle; }
+    .td-name { display: flex; align-items: center; gap: 9px; min-width: 160px; }
+    .td-name img { width: 30px; height: 30px; border-radius: 5px; background: var(--surface2); flex-shrink: 0; }
+    .td-name .fish-label { }
+    .td-name .fish-label b { font-size: 13px; font-weight: 600; display: block; line-height: 1.2; }
+    .td-name .fish-label small { font-size: 11px; color: var(--text-muted); }
+    .td-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .td-profit { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .td-profit.pos { color: var(--green); }
+    .td-profit.neg { color: var(--red); }
+    .yield-chip {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .yield-chip.rare { color: var(--accent); border-color: var(--accent-glow); background: var(--accent-dim); }
+    .yield-chip.boss { color: var(--blue); border-color: rgba(88,166,255,0.3); background: rgba(88,166,255,0.1); }
+
+    /* ── DETAIL DRAWER ───────────────────────────────────────────────────── */
+    .detail-drawer {
+      display: none;
+      margin: 0 14px 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-size: 13px;
+    }
+    .detail-drawer.open { display: block; }
+    .detail-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+    }
+    .detail-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+    }
+    .detail-item .di-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+    .detail-item .di-value { font-size: 14px; font-weight: 700; color: var(--text); }
+    .detail-item.di-profit .di-value.pos { color: var(--green); }
+    .detail-item.di-profit .di-value.neg { color: var(--red); }
+    .detail-formula {
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .detail-formula b { color: var(--text); }
+    .detail-formula .f-accent { color: var(--accent); font-weight: 700; }
+    .detail-formula .f-green  { color: var(--green); font-weight: 700; }
+    .detail-formula .f-red    { color: var(--red); font-weight: 700; }
+
+    /* ── STATE BOXES ─────────────────────────────────────────────────────── */
+    .state-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 52px 20px;
+      gap: 10px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .state-box .state-icon { font-size: 36px; opacity: .4; }
+    .state-box p { font-size: 13px; }
+    .state-box small { font-size: 11px; color: var(--text-dim); }
+
+    /* ── TOAST ───────────────────────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: calc(var(--safe-bot) + 20px);
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 9px 18px;
+      font-size: 13px;
+      color: var(--text);
+      z-index: 999;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+      opacity: 0;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ── OFFLINE BANNER ──────────────────────────────────────────────────── */
+    #offline-banner {
+      display: none;
+      background: var(--red-dim);
+      border-bottom: 1px solid var(--red);
+      padding: 7px 16px;
+      font-size: 12px;
+      color: var(--red);
+      text-align: center;
+    }
+
+    /* ── RESPONSIVE TWEAKS ───────────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .col-chops { display: none; }
+      .col-gross { display: none; }
+    }
+    @media (max-width: 480px) {
+      .col-yield { display: none; }
+      .summary-row { grid-template-columns: 1fr 1fr; }
+      .summary-card:last-child { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="offline-banner">⚠ Sin conexión — mostrando última sesión cacheada</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-icon">🐟</div>
+    <div>
+      <div class="topbar-title">Fish Calculator</div>
+      <div class="topbar-sub">Albion Online</div>
+    </div>
+  </div>
+  <div class="server-pill">
+    <button class="active" data-server="west">AM</button>
+    <button data-server="europe">EU</button>
+    <button data-server="east">AS</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- SUMMARY ROW -->
+  <div class="summary-row">
+    <div class="summary-card highlight">
+      <div class="sc-label">Mejor ganancia</div>
+      <div class="sc-value accent" id="sum-best">—</div>
+      <div class="sc-sub" id="sum-best-name">por pez</div>
+    </div>
+    <div class="summary-card">
+      <div class="sc-label">Precio Chopped</div>
+      <div class="sc-value" id="sum-chops">—</div>
+      <div class="sc-sub" id="sum-chops-city">T1_FISHCHOPS</div>
+    </div>
+    <div class="summary-card">
+      <div class="sc-label">Con datos</div>
+      <div class="sc-value" id="sum-count">—</div>
+      <div class="sc-sub">peces cargados</div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- LEFT: Settings -->
+    <div class="panel">
+      <div class="panel-header">⚙ Configuración</div>
+      <div class="panel-body">
+
+        <div class="field">
+          <div class="field-label">Ciudad — Comprar peces</div>
+          <select id="buy-city">
+            <option>Lymhurst</option><option>Bridgewatch</option><option>Martlock</option>
+            <option>Fort Sterling</option><option>Thetford</option><option>Caerleon</option><option>Brecilien</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Ciudad — Vender Chopped Fish</div>
+          <select id="sell-city">
+            <option>Lymhurst</option><option>Bridgewatch</option><option>Martlock</option>
+            <option>Fort Sterling</option><option>Thetford</option><option>Caerleon</option><option>Brecilien</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Rate of Return del Butcher</div>
+          <div class="ror-row">
+            <input type="range" id="ror-slider" min="100" max="140" value="100" step="1"/>
+            <span class="ror-display" id="ror-display">100%</span>
+          </div>
+          <div class="field-hint">Base: 100% · Focus máx: ~138%</div>
+        </div>
+
+        <div class="toggle-list">
+          <label class="toggle-item">
+            <input type="checkbox" id="own-fish"/>
+            <div class="toggle-text">
+              <b>Pez propio (pesca)</b>
+              <small>Costo del pez = 0</small>
+            </div>
+          </label>
+          <label class="toggle-item">
+            <input type="checkbox" id="use-buy-order"/>
+            <div class="toggle-text">
+              <b>Comprar con Buy Order</b>
+              <small>Usa buy_price_max + 2.5% setup fee</small>
+            </div>
+          </label>
+          <label class="toggle-item">
+            <input type="checkbox" id="include-tax" checked/>
+            <div class="toggle-text">
+              <b>Incluir fees de venta</b>
+              <small>Tax + 2.5% setup fee al vender</small>
+            </div>
+          </label>
+          <label class="toggle-item">
+            <input type="checkbox" id="premium"/>
+            <div class="toggle-text">
+              <b>Premium</b>
+              <small>Tax 4% vs 8% sin premium</small>
+            </div>
+          </label>
+        </div>
+
+        <button class="refresh-btn" id="refresh-btn" onclick="loadData()">
+          <span id="refresh-icon">↻</span>
+          <span id="refresh-label">Actualizar precios</span>
+        </button>
+        <div class="last-updated" id="last-updated"></div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Table -->
+    <div class="table-card">
+      <div class="table-toolbar">
+        <div class="table-toolbar-title">📊 Resultados</div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">Todos</button>
+          <button class="filter-tab" data-filter="rare">Raros</button>
+          <button class="filter-tab" data-filter="common">Comunes</button>
+        </div>
+      </div>
+
+      <!-- Detail drawer (shown when row selected) -->
+      <div class="detail-drawer" id="detail-drawer">
+        <div class="detail-title" id="detail-title">Detalle</div>
+        <div class="detail-grid" id="detail-grid"></div>
+        <div class="detail-formula" id="detail-formula"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="main-table">
+          <thead>
+            <tr>
+              <th data-col="name">Pez</th>
+              <th data-col="yield" class="col-yield">Yield</th>
+              <th data-col="fishPrice" id="fish-price-th">Precio pez</th>
+              <th data-col="chopsPrice" class="col-chops">Chopped/u</th>
+              <th data-col="gross" class="col-gross">Ingreso bruto</th>
+              <th data-col="profit">Ganancia neta</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr><td colspan="6">
+              <div class="state-box">
+                <div class="state-icon">🎣</div>
+                <p>Pulsa "Actualizar precios" para cargar datos del mercado</p>
+                <small>Conecta con el Albion Online Data Project</small>
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+// ─── CONSTANTES ───────────────────────────────────────────────────────────────
+const SERVERS = {
+  west:   'https://west.albion-online-data.com',
+  europe: 'https://europe.albion-online-data.com',
+  east:   'https://east.albion-online-data.com',
+};
+
+// Yield = Chopped Fish producidos por 1 pez al 100% RoR
+// Fuente: albiononlinetools.com/economy/butcher.php
+const FISH = [
+  // Comunes Freshwater
+  { id:'T1_FISH_FRESHWATER_ALL_COMMON', name:'Common Rudd',          t:1, yield:1,   sec:'common', label:'Freshwater' },
+  { id:'T2_FISH_FRESHWATER_ALL_COMMON', name:'Striped Carp',         t:2, yield:2,   sec:'common', label:'Freshwater' },
+  { id:'T3_FISH_FRESHWATER_ALL_COMMON', name:'Albion Perch',         t:3, yield:3,   sec:'common', label:'Freshwater' },
+  { id:'T4_FISH_FRESHWATER_ALL_COMMON', name:'Bluescale Pike',       t:4, yield:4,   sec:'common', label:'Freshwater' },
+  { id:'T5_FISH_FRESHWATER_ALL_COMMON', name:'Spotted Trout',        t:5, yield:6,   sec:'common', label:'Freshwater' },
+  { id:'T6_FISH_FRESHWATER_ALL_COMMON', name:'Brightscale Zander',   t:6, yield:8,   sec:'common', label:'Freshwater' },
+  { id:'T7_FISH_FRESHWATER_ALL_COMMON', name:'Danglemouth Catfish',  t:7, yield:10,  sec:'common', label:'Freshwater' },
+  { id:'T8_FISH_FRESHWATER_ALL_COMMON', name:'River Sturgeon',       t:8, yield:14,  sec:'common', label:'Freshwater' },
+  // Comunes Saltwater
+  { id:'T1_FISH_SALTWATER_ALL_COMMON',  name:'Common Herring',       t:1, yield:1,   sec:'common', label:'Saltwater' },
+  { id:'T2_FISH_SALTWATER_ALL_COMMON',  name:'Striped Mackarel',     t:2, yield:2,   sec:'common', label:'Saltwater' },
+  { id:'T3_FISH_SALTWATER_ALL_COMMON',  name:'Flatshore Plaice',     t:3, yield:3,   sec:'common', label:'Saltwater' },
+  { id:'T4_FISH_SALTWATER_ALL_COMMON',  name:'Bluescale Cod',        t:4, yield:4,   sec:'common', label:'Saltwater' },
+  { id:'T5_FISH_SALTWATER_ALL_COMMON',  name:'Spotted Wolffish',     t:5, yield:6,   sec:'common', label:'Saltwater' },
+  { id:'T6_FISH_SALTWATER_ALL_COMMON',  name:'Strongfin Salmon',     t:6, yield:8,   sec:'common', label:'Saltwater' },
+  { id:'T7_FISH_SALTWATER_ALL_COMMON',  name:'Bluefin Tuna',         t:7, yield:10,  sec:'common', label:'Saltwater' },
+  { id:'T8_FISH_SALTWATER_ALL_COMMON',  name:'Steelscale Swordfish', t:8, yield:14,  sec:'common', label:'Saltwater' },
+  // Raros
+  { id:'T3_FISH_FRESHWATER_FOREST_RARE',    name:'Greenriver Eel',      t:3, yield:10, sec:'rare', label:'Forest' },
+  { id:'T5_FISH_FRESHWATER_FOREST_RARE',    name:'Redspring Eel',        t:5, yield:20, sec:'rare', label:'Forest' },
+  { id:'T7_FISH_FRESHWATER_FOREST_RARE',    name:'Deadwater Eel',        t:7, yield:30, sec:'rare', label:'Forest' },
+  { id:'T3_FISH_FRESHWATER_MOUNTAIN_RARE',  name:'Upland Coldeye',       t:3, yield:10, sec:'rare', label:'Mountain' },
+  { id:'T5_FISH_FRESHWATER_MOUNTAIN_RARE',  name:'Mountain Blindeye',    t:5, yield:20, sec:'rare', label:'Mountain' },
+  { id:'T7_FISH_FRESHWATER_MOUNTAIN_RARE',  name:'Frostpeak Deadeye',    t:7, yield:30, sec:'rare', label:'Mountain' },
+  { id:'T3_FISH_FRESHWATER_HIGHLANDS_RARE', name:'Stonestream Lurcher',  t:3, yield:10, sec:'rare', label:'Highlands' },
+  { id:'T5_FISH_FRESHWATER_HIGHLANDS_RARE', name:'Rushwater Lurcher',    t:5, yield:20, sec:'rare', label:'Highlands' },
+  { id:'T7_FISH_FRESHWATER_HIGHLANDS_RARE', name:'Thunderfall Lurcher',  t:7, yield:30, sec:'rare', label:'Highlands' },
+  { id:'T3_FISH_FRESHWATER_STEPPE_RARE',    name:'Lowriver Crab',        t:3, yield:10, sec:'rare', label:'Steppe' },
+  { id:'T5_FISH_FRESHWATER_STEPPE_RARE',    name:'Drybrook Crab',        t:5, yield:20, sec:'rare', label:'Steppe' },
+  { id:'T7_FISH_FRESHWATER_STEPPE_RARE',    name:'Dusthole Crab',        t:7, yield:30, sec:'rare', label:'Steppe' },
+  { id:'T3_FISH_FRESHWATER_SWAMP_RARE',     name:'Greenmoor Clam',       t:3, yield:10, sec:'rare', label:'Swamp' },
+  { id:'T5_FISH_FRESHWATER_SWAMP_RARE',     name:'Murkwater Clam',       t:5, yield:20, sec:'rare', label:'Swamp' },
+  { id:'T7_FISH_FRESHWATER_SWAMP_RARE',     name:'Blackbog Clam',        t:7, yield:30, sec:'rare', label:'Swamp' },
+  { id:'T3_FISH_SALTWATER_ALL_RARE',        name:'Shallowshore Squid',   t:3, yield:10, sec:'rare', label:'Saltwater' },
+  { id:'T5_FISH_SALTWATER_ALL_RARE',        name:'Midwater Octopus',     t:5, yield:20, sec:'rare', label:'Saltwater' },
+  { id:'T7_FISH_SALTWATER_ALL_RARE',        name:'Deepwater Kraken',     t:7, yield:30, sec:'rare', label:'Saltwater' },
+  { id:'T3_FISH_FRESHWATER_AVALON_RARE',    name:'Whitefog Snapper',     t:3, yield:10, sec:'rare', label:'Avalon' },
+  { id:'T5_FISH_FRESHWATER_AVALON_RARE',    name:'Clearhaze Snapper',    t:5, yield:20, sec:'rare', label:'Avalon' },
+  { id:'T7_FISH_FRESHWATER_AVALON_RARE',    name:'Puremist Snapper',     t:7, yield:30, sec:'rare', label:'Avalon' },
+  // Boss
+  { id:'T8_FISH_SALTWATER_ALL_BOSS_SHARK',  name:'Shark',                t:8, yield:200, sec:'boss', label:'Boss' },
+];
+const CHOPS_ID = 'T1_FISHCHOPS';
+
+// ─── ESTADO ───────────────────────────────────────────────────────────────────
+let server     = 'west';
+let cache      = {};
+let sortCol    = 'profit';
+let sortDir    = 'desc';
+let filterSec  = 'all';
+let selRow     = null;
+
+// ─── UTILIDADES ───────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const fmt = n => n == null || isNaN(n) ? '—' : Math.round(n).toLocaleString('es-CO') + ' ☽';
+
+function toast(msg, ms = 2500) {
+  const el = $('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), ms);
+}
+
+// ─── SERVER TABS ──────────────────────────────────────────────────────────────
+document.querySelectorAll('.server-pill button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.server-pill button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    server = btn.dataset.server;
+    cache  = {};
+    loadData();
+  });
+});
+
+// ─── FILTER TABS ──────────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterSec = btn.dataset.filter;
+    if (Object.keys(cache).length) rerender();
+  });
+});
+
+// ─── SORT ─────────────────────────────────────────────────────────────────────
+document.querySelectorAll('#main-table thead th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (!col) return;
+    if (sortCol === col) sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+    else { sortCol = col; sortDir = 'desc'; }
+    document.querySelectorAll('#main-table thead th').forEach(t => t.classList.remove('sorted'));
+    th.classList.add('sorted');
+    if (Object.keys(cache).length) rerender();
+  });
+});
+
+// ─── SLIDER ───────────────────────────────────────────────────────────────────
+$('ror-slider').addEventListener('input', e => {
+  $('ror-display').textContent = e.target.value + '%';
+  if (Object.keys(cache).length) rerender();
+});
+
+// ─── TOGGLES & SELECTS (re-render solo, sin re-fetch) ─────────────────────────
+['own-fish','use-buy-order','include-tax','premium'].forEach(id => {
+  $(id).addEventListener('change', () => { if (Object.keys(cache).length) rerender(); });
+});
+// Cities DO require re-fetch
+['buy-city','sell-city'].forEach(id => {
+  $(id).addEventListener('change', () => { if (Object.keys(cache).length) loadData(); });
+});
+
+// ─── CÁLCULO ──────────────────────────────────────────────────────────────────
+function calcRow(fishData, chopsData, fish, ror) {
+  const ownFish     = $('own-fish').checked;
+  const useBuyOrder = $('use-buy-order').checked;
+  const incTax      = $('include-tax').checked;
+  const premium     = $('premium').checked;
+
+  const chopsUnit = chopsData?.sell_price_min > 0 ? chopsData.sell_price_min : null;
+  if (!chopsUnit) return null;
+
+  const realYield = Math.floor(fish.yield * ror / 100);
+  if (realYield === 0) return null;
+
+  // Costo del pez
+  let fishCost = 0;
+  let fishPrice = null;
+  if (!ownFish) {
+    fishPrice = useBuyOrder
+      ? (fishData?.buy_price_max  > 0 ? fishData.buy_price_max  : null)
+      : (fishData?.sell_price_min > 0 ? fishData.sell_price_min : null);
+    if (!fishPrice) return null;
+    fishCost = fishPrice * (useBuyOrder ? 1.025 : 1);
+  }
+
+  const gross = realYield * chopsUnit;
+  const tax   = premium ? 0.04 : 0.08;
+  const net   = incTax ? gross * (1 - tax - 0.025) : gross;
+  const profit = net - fishCost;
+
+  return { realYield, fishPrice, fishCost, chopsUnit, gross, net, profit };
+}
+
+// ─── FETCH ────────────────────────────────────────────────────────────────────
+async function tryFetch(url, ms = 7000) {
+  const r = await fetch(url, { signal: AbortSignal.timeout(ms) });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r;
+}
+
+async function fetchPrices(ids, locs) {
+  const base   = SERVERS[server];
+  const target = `${base}/api/v2/stats/prices/${ids.join(',')}.json?locations=${locs.join(',')}&qualities=1`;
+
+  // 1. Directo
+  try { return await (await tryFetch(target, 4000)).json(); } catch(_) {}
+
+  // 2. Proxies en cascada
+  const proxies = [
+    () => tryFetch(`https://corsproxy.io/?${encodeURIComponent(target)}`).then(r=>r.json()),
+    () => tryFetch(`https://api.allorigins.win/get?url=${encodeURIComponent(target)}`).then(r=>r.json()).then(w=>{ if(!w.contents) throw 0; return JSON.parse(w.contents); }),
+    () => tryFetch(`https://thingproxy.freeboard.io/fetch/${target}`).then(r=>r.json()),
+  ];
+
+  const errs = [];
+  for (const px of proxies) {
+    try { return await px(); } catch(e) { errs.push(e?.message || e); }
+  }
+  throw new Error('Sin conexión. Proxies fallaron: ' + errs.join(' | '));
+}
+
+// ─── LOAD ─────────────────────────────────────────────────────────────────────
+async function loadData() {
+  const btn = $('refresh-btn');
+  const icon = $('refresh-icon');
+  const label = $('refresh-label');
+  btn.disabled = true;
+  icon.classList.add('spin');
+  label.textContent = 'Cargando...';
+  setLoading();
+
+  try {
+    const buyCity  = $('buy-city').value;
+    const sellCity = $('sell-city').value;
+    const allIds   = [...FISH.map(f => f.id), CHOPS_ID];
+    const locs     = [...new Set([buyCity, sellCity])];
+
+    const data = await fetchPrices(allIds, locs);
+
+    cache = {};
+    data.forEach(d => {
+      const k = `${d.item_id}|${d.city}`;
+      if (!cache[k]) { cache[k] = d; return; }
+      // Preferir precio más bajo y > 0
+      if (d.sell_price_min > 0 && (cache[k].sell_price_min === 0 || d.sell_price_min < cache[k].sell_price_min))
+        cache[k] = d;
+    });
+
+    $('last-updated').textContent = '↻ ' + new Date().toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
+    toast('✓ Precios actualizados');
+    rerender();
+  } catch(e) {
+    console.error(e);
+    setError(e.message);
+  }
+
+  btn.disabled = false;
+  icon.classList.remove('spin');
+  label.textContent = 'Actualizar precios';
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function rerender() {
+  const buyCity  = $('buy-city').value;
+  const sellCity = $('sell-city').value;
+  const ror      = parseInt($('ror-slider').value);
+  const ownFish  = $('own-fish').checked;
+  const useBuyOrder = $('use-buy-order').checked;
+
+  $('fish-price-th').textContent = ownFish ? 'Costo pez' : useBuyOrder ? 'Buy Order pez' : 'Venta directa pez';
+
+  const chopsData = cache[`${CHOPS_ID}|${sellCity}`] || null;
+  const chopsPrice = chopsData?.sell_price_min > 0 ? chopsData.sell_price_min : null;
+
+  // Build rows
+  let rows = FISH
+    .filter(f => filterSec === 'all' || f.sec === filterSec || (filterSec === 'rare' && f.sec === 'boss'))
+    .map(fish => {
+      const fishData = cache[`${fish.id}|${buyCity}`] || null;
+      const result   = calcRow(fishData, chopsData, fish, ror);
+      return { fish, fishData, result, chopsPrice };
+    });
+
+  // Sort
+  rows.sort((a, b) => {
+    let av, bv;
+    switch(sortCol) {
+      case 'profit':    av = a.result?.profit    ?? -Infinity; bv = b.result?.profit    ?? -Infinity; break;
+      case 'gross':     av = a.result?.gross      ?? -Infinity; bv = b.result?.gross      ?? -Infinity; break;
+      case 'yield':     av = a.fish.yield;         bv = b.fish.yield;         break;
+      case 'fishPrice': av = a.result?.fishPrice  ?? -Infinity; bv = b.result?.fishPrice  ?? -Infinity; break;
+      case 'chopsPrice':av = a.chopsPrice         ?? -Infinity; bv = b.chopsPrice         ?? -Infinity; break;
+      case 'name':      av = a.fish.name;          bv = b.fish.name; break;
+      default:          av = 0; bv = 0;
+    }
+    if (typeof av === 'string') return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortDir === 'asc' ? av - bv : bv - av;
+  });
+
+  // Summary
+  const withData = rows.filter(r => r.result != null);
+  const best = withData[0];
+  if (best) {
+    $('sum-best').textContent = fmt(best.result.profit);
+    $('sum-best').className   = 'sc-value ' + (best.result.profit >= 0 ? 'accent' : 'neg');
+    $('sum-best-name').textContent = best.fish.name;
+  } else {
+    $('sum-best').textContent = '—'; $('sum-best').className = 'sc-value accent';
+    $('sum-best-name').textContent = 'por pez';
+  }
+  $('sum-chops').textContent = chopsPrice ? fmt(chopsPrice) : '—';
+  $('sum-chops-city').textContent = sellCity;
+  $('sum-count').textContent = withData.length + '/' + rows.length;
+
+  // Group by section for headers
+  const sections = filterSec === 'all'
+    ? [
+        { key:'common', label:'Peces Comunes', items: rows.filter(r=>r.fish.sec==='common') },
+        { key:'rare',   label:'Peces Raros',   items: rows.filter(r=>r.fish.sec==='rare')   },
+        { key:'boss',   label:'Boss',           items: rows.filter(r=>r.fish.sec==='boss')   },
+      ]
+    : [{ key: filterSec, label:'', items: rows }];
+
+  let html = '';
+  sections.forEach(sec => {
+    if (!sec.items.length) return;
+    if (filterSec === 'all') {
+      html += `<tr class="section-hdr"><td colspan="6">${sec.label}</td></tr>`;
+    }
+    sec.items.forEach((r, i) => {
+      const { fish, result } = r;
+      const realYield = Math.floor(fish.yield * ror / 100);
+      const chipClass = fish.sec === 'boss' ? 'boss' : fish.sec === 'rare' ? 'rare' : '';
+
+      const profitClass = result == null ? '' : result.profit >= 0 ? 'pos' : 'neg';
+      const profitStr   = result == null ? '<span style="color:var(--text-dim)">—</span>' : fmt(result.profit);
+
+      const fishPriceStr = ownFish
+        ? '<span style="color:var(--green);font-size:12px">Propio</span>'
+        : result?.fishPrice != null ? fmt(result.fishPrice)
+        : '<span style="color:var(--text-dim)">—</span>';
+
+      const rowData = result ? btoa(JSON.stringify({
+        name: fish.name, t: fish.t, sec: fish.sec,
+        baseYield: fish.yield, realYield, ror,
+        fishCost: result.fishCost,
+        chopsUnit: result.chopsUnit,
+        gross: result.gross,
+        net: result.net,
+        profit: result.profit,
+        ownFish: $('own-fish').checked,
+        incTax: $('include-tax').checked,
+        premium: $('premium').checked,
+      })) : 'null';
+
+      html += `
+        <tr class="data-row" onclick="selectRow(this,'${rowData}')">
+          <td><div class="td-name">
+            <img src="https://render.albiononline.com/v1/item/${fish.id}" loading="lazy" alt="${fish.name}"/>
+            <div class="fish-label">
+              <b>T${fish.t} ${fish.name}</b>
+              <small>${fish.label}</small>
+            </div>
+          </div></td>
+          <td class="col-yield"><span class="yield-chip ${chipClass}">×${realYield}</span></td>
+          <td class="td-num">${fishPriceStr}</td>
+          <td class="td-num col-chops">${chopsPrice ? fmt(chopsPrice) : '<span style="color:var(--text-dim)">—</span>'}</td>
+          <td class="td-num col-gross">${result ? fmt(result.gross) : '<span style="color:var(--text-dim)">—</span>'}</td>
+          <td class="td-profit ${profitClass}">${profitStr}</td>
+        </tr>`;
+    });
+  });
+
+  $('tbody').innerHTML = html || `<tr><td colspan="6"><div class="state-box">
+    <div class="state-icon">🔍</div><p>No hay resultados para este filtro</p></div></td></tr>`;
+}
+
+function selectRow(tr, dataB64) {
+  // Toggle: deselect if same row
+  if (selRow === tr) {
+    tr.classList.remove('selected');
+    selRow = null;
+    const d = $('detail-drawer');
+    d.classList.remove('open');
+    return;
+  }
+  document.querySelectorAll('.data-row').forEach(r => r.classList.remove('selected'));
+  tr.classList.add('selected');
+  selRow = tr;
+
+  const drawer = $('detail-drawer');
+  if (dataB64 === 'null') { drawer.classList.remove('open'); return; }
+
+  let r;
+  try { r = JSON.parse(atob(dataB64)); } catch(_) { drawer.classList.remove('open'); return; }
+
+  $('detail-title').textContent = `T${r.t} ${r.name} — Desglose`;
+
+  const rorNote = r.ror !== 100 ? ` (${r.baseYield}×${r.ror}%RoR)` : '';
+
+  $('detail-grid').innerHTML = `
+    <div class="detail-item"><div class="di-label">Yield real</div><div class="di-value">×${r.realYield}${rorNote}</div></div>
+    <div class="detail-item"><div class="di-label">Costo pez</div><div class="di-value">${r.ownFish ? 'Propio (0)' : fmt(r.fishCost)}</div></div>
+    <div class="detail-item"><div class="di-label">Chopped / ud</div><div class="di-value">${fmt(r.chopsUnit)}</div></div>
+    <div class="detail-item"><div class="di-label">Ingreso bruto</div><div class="di-value">${fmt(r.gross)}</div></div>
+    <div class="detail-item"><div class="di-label">Ingreso neto</div><div class="di-value">${fmt(r.net)}</div></div>
+    <div class="detail-item di-profit"><div class="di-label">Ganancia neta</div><div class="di-value ${r.profit>=0?'pos':'neg'}">${fmt(r.profit)}</div></div>
+  `;
+
+  const taxLine = r.incTax
+    ? `× (1 − ${r.premium?'4':'8'}%tax − 2.5%fee) = <b class="f-green">${fmt(r.net)}</b>`
+    : `<b class="f-green">${fmt(r.gross)}</b> (sin fees)`;
+
+  $('detail-formula').innerHTML = `
+    <b>Fórmula aplicada:</b><br>
+    Yield: floor(${r.baseYield} × ${r.ror}% RoR) = <b class="f-accent">${r.realYield} Chopped Fish</b><br>
+    Ingreso bruto: ${r.realYield} × ${fmt(r.chopsUnit)} = <b>${fmt(r.gross)}</b><br>
+    Ingreso neto: ${fmt(r.gross)} ${taxLine}<br>
+    Costo pez: <b>${r.ownFish ? '0 (propio)' : fmt(r.fishCost)}</b><br>
+    <b>Ganancia = ${fmt(r.net)} − ${r.ownFish?'0':fmt(r.fishCost)} = <span class="${r.profit>=0?'f-green':'f-red'}">${fmt(r.profit)}</span></b>
+  `;
+
+  drawer.classList.add('open');
+  drawer.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function setLoading() {
+  $('tbody').innerHTML = `<tr><td colspan="6"><div class="state-box">
+    <div class="spin" style="font-size:28px;opacity:.4">↻</div>
+    <p>Consultando precios del mercado...</p>
+    <small>Conectando con el Albion Online Data Project</small>
+  </div></td></tr>`;
+}
+
+function setError(msg) {
+  $('tbody').innerHTML = `<tr><td colspan="6"><div class="state-box">
+    <div class="state-icon">⚠️</div>
+    <p>${msg}</p>
+    <small>Verifica tu conexión e inténtalo de nuevo</small>
+  </div></td></tr>`;
+}
+
+// ─── OFFLINE ─────────────────────────────────────────────────────────────────
+window.addEventListener('online',  () => { $('offline-banner').style.display='none'; });
+window.addEventListener('offline', () => { $('offline-banner').style.display='block'; });
+
+// ─── SERVICE WORKER ───────────────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(console.warn);
+}
+</script>
+</body>
+</html>
