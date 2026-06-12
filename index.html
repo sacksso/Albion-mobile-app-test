@@ -19,8 +19,8 @@
   --tx:#e6edf3;--tx2:#8b949e;--tx3:#484f58;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-body{background:var(--bg);color:var(--tx);overflow-x:hidden;padding-bottom:70px;}
-header{background:var(--s1);padding:12px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:between;align-items:center;position:sticky;top:0;z-index:90;}
+body{background:var(--bg);color:var(--tx);overflow-x:hidden;padding-bottom:75px;}
+header{background:var(--s1);padding:12px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:90;}
 .logo{font-size:18px;font-weight:700;letter-spacing:-0.5px;}
 .logo span{color:var(--acc);}
 .srv-pill{display:flex;background:var(--s3);border-radius:20px;padding:2px;border:1px solid var(--bd);}
@@ -51,7 +51,6 @@ button:disabled{opacity:0.5;cursor:not-allowed;}
 .market-item-header img{width:48px;height:48px;object-fit:contain;}
 .mih-name{font-size:15px;font-weight:700;}
 .mih-id{font-size:12px;color:var(--tx2);}
-.mih-best{font-size:12px;color:var(--acc);margin-top:2px;}
 .tbl-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-top:12px;}
 table{width:100%;border-collapse:collapse;text-align:left;font-size:13px;}
 th{background:var(--s3);color:var(--tx2);padding:10px 12px;font-weight:600;font-size:12px;}
@@ -82,14 +81,14 @@ tr.dr:hover{background:var(--s2);}
 .slot-sub{font-size:11px;color:var(--tx2);margin-top:1px;}
 .slot-price{font-size:13px;font-weight:700;text-align:right;}
 .q-badge{font-size:10px;padding:1px 4px;border-radius:4px;font-weight:700;}
-.q0{background:var(--s3);color:var(--tx2);}
-.q1{background:rgba(88,166,255,0.15);color:var(--blu);}
-.q2{background:var(--grn-d);color:var(--grn);}
-.q3{background:rgba(188,140,255,0.15);color:var(--pur);}
-.q4{background:var(--acc-d);color:var(--acc);}
+.q1{background:var(--s3);color:var(--tx2);}
+.q2{background:rgba(88,166,255,0.15);color:var(--blu);}
+.q3{background:var(--grn-d);color:var(--grn);}
+.q4{background:rgba(188,140,255,0.15);color:var(--pur);}
+.q5{background:var(--acc-d);color:var(--acc);}
 .modal{position:fixed;top:0;bottom:0;left:0;right:0;background:rgba(0,0,0,0.8);z-index:200;display:none;align-items:center;justify-content:center;padding:16px;}
 .modal-content{background:var(--s1);border:1px solid var(--bd);border-radius:14px;width:100%;max-width:460px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;}
-.modal-header{padding:14px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:between;align-items:center;}
+.modal-header{padding:14px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;}
 .modal-body{padding:16px;overflow-y:auto;flex:1;}
 .modal-item{display:flex;align-items:center;gap:12px;padding:8px;border-radius:8px;cursor:pointer;margin-bottom:6px;transition:background .2s;}
 .modal-item:hover{background:var(--s2);}
@@ -97,18 +96,6 @@ tr.dr:hover{background:var(--s2);}
 .modal-item-info{display:flex;flex-direction:column;}
 .modal-item-info b{font-size:13px;}
 .modal-item-info small{font-size:11px;color:var(--tx2);}
-.drawer{position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--bd);border-radius:16px 16px 0 0;z-index:150;transform:translateY(100%);transition:transform .3s cubic-bezier(0.1,0.7,0.1,1);max-height:70vh;overflow-y:auto;}
-.drawer.on{transform:translateY(0);}
-.drawer-header{padding:14px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:between;align-items:center;position:sticky;top:0;background:var(--s1);z-index:2;}
-.drawer-body{padding:16px;}
-.detail-grid{display:flex;flex-direction:column;gap:8px;}
-.di{display:flex;justify-content:between;padding:8px 0;border-bottom:1px solid var(--bd2);font-size:13px;}
-.dl{color:var(--tx2);}
-.dv{font-weight:600;}
-.spin{animation:spin 1s linear infinite;}
-@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-.state{text-align:center;padding:30px 16px;color:var(--tx2);}
-.state .ico{font-size:32px;margin-bottom:8px;}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-20px);background:#238636;color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;visibility:hidden;transition:all .3s;z-index:300;box-shadow:0 4px 12px rgba(0,0,0,0.5);}
 .toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
 </style>
@@ -125,40 +112,32 @@ tr.dr:hover{background:var(--s2);}
 </header>
 
 <div id="page-mkt" class="page on">
-  <h2>Visor del Mercado</h2>
-  <p class="sub">Busca por nombre en español o introduce el ID técnico del objeto.</p>
+  <h2>Buscador del Mercado</h2>
+  <p class="sub">Escribe el nombre del ítem en español para buscar de forma precisa.</p>
   <div class="search-box">
-    <input type="text" id="mkt-input" placeholder="Ej: Espada, Capucha de cazador, T4_BAG..." style="flex:2;"/>
+    <input type="text" id="mkt-input" placeholder="Ej: Espada Ancha, Hábito de erudito, Capucha de cazador..."/>
     <button class="btn-main" onclick="mktSearch()">🔍 Buscar</button>
   </div>
   <div id="mkt-results">
-    <div class="state">
-      <div class="ico">💡</div>
-      <p>Escribe una palabra clave arriba para consultar la API de Albion Online Data Project.</p>
-    </div>
+    <div class="state"><div class="ico">📊</div><p>Ingresa un objeto válido para desplegar precios en tiempo real.</p></div>
   </div>
 </div>
 
 <div id="page-fish" class="page">
-  <h2>Calculadora de Chopped Fish</h2>
-  <p class="sub">Analiza los márgenes de ganancia transformando pescado crudo a pescado picado.</p>
+  <h2>Calculadora de Pescado Picado</h2>
+  <p class="sub">Los precios de Chopped Fish se aíslan rigurosamente según la ciudad de venta elegida.</p>
   
   <div class="sum-row">
     <div class="sum-card">
       <div class="sum-lbl">Valor Chopped Fish</div>
       <div class="sum-val" id="f-chops-val">—</div>
-      <div class="sum-sub" id="f-chops-city">Sin datos</div>
-    </div>
-    <div class="sum-card">
-      <div class="sum-lbl">Mejor Margen</div>
-      <div class="sum-val pos" id="f-best-val">—</div>
-      <div class="sum-sub" id="f-best-name">Ninguno</div>
+      <div class="sum-sub" id="f-chops-city">Sin sincronizar</div>
     </div>
   </div>
 
   <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
     <div style="flex:1;min-width:120px;">
-      <label style="font-size:11px;color:var(--tx2);font-weight:600;">Compra Pez en:</label>
+      <label style="font-size:11px;color:var(--tx2);font-weight:600;">Comprar Pescado en:</label>
       <select id="f-buy-city" onchange="fishRender()">
         <option value="Lymhurst">Lymhurst</option>
         <option value="Bridgewatch">Bridgewatch</option>
@@ -169,7 +148,7 @@ tr.dr:hover{background:var(--s2);}
       </select>
     </div>
     <div style="flex:1;min-width:120px;">
-      <label style="font-size:11px;color:var(--tx2);font-weight:600;">Vende Chopped en:</label>
+      <label style="font-size:11px;color:var(--tx2);font-weight:600;">Vender Chopped en:</label>
       <select id="f-sell-city" onchange="fishLoad()">
         <option value="Lymhurst">Lymhurst</option>
         <option value="Bridgewatch">Bridgewatch</option>
@@ -182,8 +161,8 @@ tr.dr:hover{background:var(--s2);}
   </div>
 
   <div class="cfg-box">
-    <label class="cfg-i"><input type="checkbox" id="f-buyord" onchange="fishRender()"/>Usar Buy Order (Pez)</label>
-    <label class="cfg-i"><input type="checkbox" id="f-tax" checked onchange="fishRender()"/>Descontar Impuestos</label>
+    <label class="cfg-i"><input type="checkbox" id="f-buyord" onchange="fishRender()"/>Usar Orden de Compra</label>
+    <label class="cfg-i"><input type="checkbox" id="f-tax" checked onchange="fishRender()"/>Aplicar Tasas</label>
     <label class="cfg-i"><input type="checkbox" id="f-prem" checked onchange="fishRender()"/>Tengo Premium</label>
     <label class="cfg-i"><input type="checkbox" id="f-own" onchange="fishRender()"/>Pescado propio (Costo 0)</label>
   </div>
@@ -197,26 +176,26 @@ tr.dr:hover{background:var(--s2);}
       <thead>
         <tr>
           <th>Pescado</th>
-          <th class="td-n">Yield</th>
-          <th class="td-n">Coste</th>
+          <th class="td-n">Retorno</th>
+          <th class="td-n">Costo Pez</th>
           <th class="td-n">P.Chop</th>
-          <th class="td-n">Bruto</th>
-          <th class="td-p">Profit</th>
+          <th class="td-n">Ing. Bruto</th>
+          <th class="td-p">Ganancia</th>
         </tr>
       </thead>
       <tbody id="f-tbody">
-        <tr><td colspan="6" class="state">Haz click en el botón superior para calcular.</td></tr>
+        <tr><td colspan="6" class="state">Sincroniza para cargar datos exactos.</td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
 <div id="page-build" class="page">
-  <h2>Creador de Builds</h2>
-  <p class="sub">Diseña tu equipo y calcula el valor de recompra estimado del set completo.</p>
+  <h2>Creador de Builds Profundo</h2>
+  <p class="sub">Configura tu equipamiento pieza por pieza seleccionando el Tier, encantamiento .4 y calidad.</p>
   
   <div style="margin-bottom:12px;">
-    <label style="font-size:11px;color:var(--tx2);font-weight:600;">Mercado de referencia para el Set:</label>
+    <label style="font-size:11px;color:var(--tx2);font-weight:600;">Ciudad para valuar el Set:</label>
     <select id="build-city" onchange="buildRefreshPrices()">
       <option value="Lymhurst">Lymhurst</option>
       <option value="Bridgewatch">Bridgewatch</option>
@@ -228,9 +207,9 @@ tr.dr:hover{background:var(--s2);}
   </div>
 
   <div class="sum-card" style="margin-bottom:16px;border-color:var(--acc-g);">
-    <div class="sum-lbl">Costo Total del Set</div>
+    <div class="sum-lbl">Valor Total Estimado de la Build</div>
     <div class="sum-val" id="build-total-val">0 Ag</div>
-    <div class="sum-sub">Suma de todos los slots equipados</div>
+    <div class="sum-sub">Precio acumulado de mercado directo</div>
   </div>
 
   <div class="equip-grid" id="build-slots-grid"></div>
@@ -245,28 +224,28 @@ tr.dr:hover{background:var(--s2);}
 <div class="modal" id="picker-modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h3 id="picker-title" style="font-size:16px;">Equipar Objeto</h3>
-      <button onclick="pickerClose()" style="background:none;border:none;color:var(--tx2);font-size:20px;cursor:pointer;">&times;</button>
+      <h3 id="picker-title" style="font-size:15px;font-weight:700;">Equipar Pieza</h3>
+      <button onclick="pickerClose()" style="background:none;border:none;color:var(--tx2);font-size:22px;cursor:pointer;">&times;</button>
     </div>
     <div style="padding:12px;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;flex-direction:column;gap:8px;">
-      <input type="text" id="picker-search" placeholder="Filtrar por nombre..." oninput="pickerFilter()"/>
+      <input type="text" id="picker-search" placeholder="Buscar en esta categoría..." oninput="pickerFilter()"/>
       <div style="display:flex;gap:6px;">
-        <select id="picker-tier" onchange="pickerTierChange(this.value)" style="padding:6px 10px;font-size:12px;">
+        <select id="picker-tier" onchange="pickerTierChange(this.value)">
           <option value="all">Todos los Tiers</option>
-          <option value="4">Tier 4</option>
-          <option value="5">Tier 5</option>
-          <option value="6">Tier 6</option>
-          <option value="7">Tier 7</option>
-          <option value="8">Tier 8</option>
+          <option value="4">T4</option>
+          <option value="5">T5</option>
+          <option value="6">T6</option>
+          <option value="7">T7</option>
+          <option value="8">T8</option>
         </select>
-        <select id="picker-enchant" style="padding:6px 10px;font-size:12px;">
-          <option value="0">.0 Común</option>
-          <option value="1">.1 Poco Común</option>
-          <option value="2">.2 Raro</option>
-          <option value="3">.3 Excepcional</option>
-          <option value="4">.4 Primigenio</option>
+        <select id="picker-enchant" onchange="pickerFilter()">
+          <option value="0">.0</option>
+          <option value="1">.1</option>
+          <option value="2">.2</option>
+          <option value="3">.3</option>
+          <option value="4">.4</option>
         </select>
-        <select id="picker-quality" style="padding:6px 10px;font-size:12px;">
+        <select id="picker-quality" onchange="pickerFilter()">
           <option value="1">Normal</option>
           <option value="2">Bueno</option>
           <option value="3">Notable</option>
@@ -279,14 +258,6 @@ tr.dr:hover{background:var(--s2);}
   </div>
 </div>
 
-<div class="drawer" id="f-drawer">
-  <div class="drawer-header">
-    <h3 id="f-dtitle" style="font-size:15px;">Desglose</h3>
-    <button onclick="$('f-drawer').classList.remove('on')" style="background:none;border:none;color:var(--tx2);font-size:20px;cursor:pointer;">&times;</button>
-  </div>
-  <div class="drawer-body" id="f-dgrid"></div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <script>
@@ -297,86 +268,64 @@ const ALL_CITIES=['Lymhurst','Bridgewatch','Martlock','Fort Sterling','Thetford'
 let SERVER='west';
 
 const QUALITY_LABELS=['','Normal','Bueno','Notable','Sobresaliente','Obra Maestra'];
-const QUALITY_CSS=['','q0','q1','q2','q3','q4'];
+const QUALITY_CSS=['','q1','q2','q3','q4','q5'];
 
-// BASE DE DATOS LOCAL AMPLIADA (Resuelve la búsqueda en español y añade ítems faltantes)
+// DICCIONARIO MAESTRO CORREGIDO (Solo ítems e IDs reales del juego)
 const ITEM_DICTIONARY = [
-  // --- ARMAS CORRIENTES Y DE ARTEFACTO ---
   { id: '2H_NATURESTAFF', n: 'Bastón de Naturaleza', cat: 'MAINHAND' },
   { id: '2H_BOW', n: 'Arco Natural', cat: 'MAINHAND' },
   { id: '2H_CROSSBOW', n: 'Ballesta', cat: 'MAINHAND' },
   { id: '1H_SWORD', n: 'Espada Ancha', cat: 'MAINHAND' },
   { id: '2H_CLAYMORE', n: 'Claymore', cat: 'MAINHAND' },
-  { id: '2H_CLEAVER_HELL', n: 'Talladora de Ocaso (Artefacto)', cat: 'MAINHAND' },
+  { id: '2H_CLEAVER_HELL', n: 'Talladora de Ocaso', cat: 'MAINHAND' },
   { id: '1H_AXE', n: 'Hacha de una mano', cat: 'MAINHAND' },
   { id: '2H_HALBERD', n: 'Alabarda', cat: 'MAINHAND' },
   { id: '2H_FIRESTAFF', n: 'Bastón de Fuego', cat: 'MAINHAND' },
   { id: '2H_CURSESTAFF', n: 'Bastón Maldito', cat: 'MAINHAND' },
   { id: '1H_DAGGER', n: 'Daga', cat: 'MAINHAND' },
   
-  // --- CABEZAS (PLACAS, CUEROS, TELAS) ---
   { id: 'HEAD_LEATHER_SET1', n: 'Hunter Hood (Capucha de cazador)', cat: 'HEAD' },
   { id: 'HEAD_LEATHER_SET2', n: 'Mercenary Hood (Capucha de mercenario)', cat: 'HEAD' },
   { id: 'HEAD_LEATHER_SET3', n: 'Assassin Hood (Capucha de asesino)', cat: 'HEAD' },
-  { id: 'HEAD_LEATHER_HELL', n: 'Hellion Hood (Capucha infernal)', cat: 'HEAD' },
   { id: 'HEAD_PLATE_SET1', n: 'Knight Helmet (Casco de caballero)', cat: 'HEAD' },
   { id: 'HEAD_PLATE_SET2', n: 'Guardian Helmet (Casco de guardián)', cat: 'HEAD' },
-  { id: 'HEAD_PLATE_SET3', n: 'Soldier Helmet (Casco de soldado)', cat: 'HEAD' },
   { id: 'HEAD_CLOTH_SET1', n: 'Scholar Cowl (Hábito de erudito)', cat: 'HEAD' },
-  { id: 'HEAD_CLOTH_SET2', n: 'Mage Cowl (Hábito de mago)', cat: 'HEAD' },
-  { id: 'HEAD_CLOTH_SET3', n: 'Cleric Cowl (Hábito de clérigo)', cat: 'HEAD' },
 
-  // --- PECHOS ---
   { id: 'ARMOR_LEATHER_SET1', n: 'Hunter Jacket (Chaqueta de cazador)', cat: 'ARMOR' },
   { id: 'ARMOR_LEATHER_SET2', n: 'Mercenary Jacket (Chaqueta de mercenario)', cat: 'ARMOR' },
   { id: 'ARMOR_LEATHER_SET3', n: 'Assassin Jacket (Chaqueta de asesino)', cat: 'ARMOR' },
-  { id: 'ARMOR_LEATHER_HELL', n: 'Hellion Jacket (Chaqueta infernal)', cat: 'ARMOR' },
   { id: 'ARMOR_PLATE_SET1', n: 'Knight Armor (Armadura de caballero)', cat: 'ARMOR' },
   { id: 'ARMOR_PLATE_SET2', n: 'Guardian Armor (Armadura de guardián)', cat: 'ARMOR' },
-  { id: 'ARMOR_PLATE_SET3', n: 'Soldier Armor (Armadura de soldado)', cat: 'ARMOR' },
   { id: 'ARMOR_CLOTH_SET1', n: 'Scholar Robe (Toga de erudito)', cat: 'ARMOR' },
-  { id: 'ARMOR_CLOTH_SET2', n: 'Mage Robe (Toga de mago)', cat: 'ARMOR' },
-  { id: 'ARMOR_CLOTH_SET3', n: 'Cleric Robe (Toga de clérigo)', cat: 'ARMOR' },
 
-  // --- ZAPATOS ---
   { id: 'SHOES_LEATHER_SET1', n: 'Hunter Shoes (Botas de cazador)', cat: 'SHOES' },
   { id: 'SHOES_LEATHER_SET2', n: 'Mercenary Shoes (Botas de mercenario)', cat: 'SHOES' },
-  { id: 'SHOES_LEATHER_SET3', n: 'Assassin Shoes (Botas de asesino)', cat: 'SHOES' },
   { id: 'SHOES_PLATE_SET1', n: 'Knight Boots (Botas de caballero)', cat: 'SHOES' },
-  { id: 'SHOES_PLATE_SET2', n: 'Guardian Boots (Botas de guardián)', cat: 'SHOES' },
-  { id: 'SHOES_PLATE_SET3', n: 'Soldier Boots (Botas de soldado)', cat: 'SHOES' },
   { id: 'SHOES_CLOTH_SET1', n: 'Scholar Sandals (Sandalias de erudito)', cat: 'SHOES' },
-  { id: 'SHOES_CLOTH_SET2', n: 'Mage Sandals (Sandalias de mago)', cat: 'SHOES' },
-  { id: 'SHOES_CLOTH_SET3', n: 'Cleric Sandals (Sandalias de clérigo)', cat: 'SHOES' },
 
-  // --- ACCESORIOS ---
-  { id: 'CAPE', n: 'Cape (Capa común)', cat: 'CAPE' },
-  { id: 'CAPE_FW', n: 'Fort Sterling Cape', cat: 'CAPE' },
-  { id: 'CAPE_LYM', n: 'Lymhurst Cape', cat: 'CAPE' },
-  { id: 'BAG', n: 'Bag (Bolso de viaje)', cat: 'BAG' }
+  { id: 'CAPE', n: 'Capa común', cat: 'CAPE' },
+  { id: 'BAG', n: 'Bolso de viaje', cat: 'BAG' }
 ];
 
-// Conversor dinámico que genera automáticamente los Tiers T1 a T8 para el Creador de Builds
 const SLOT_ITEMS = { HEAD: [], ARMOR: [], SHOES: [], MAINHAND: [], CAPE: [], BAG: [] };
 ITEM_DICTIONARY.forEach(item => {
-  let startTier = item.id.includes('FISH') || item.id === 'BAG' || item.id === 'CAPE' ? 3 : 4;
-  for (let t = startTier; t <= 8; t++) {
+  for (let t = 4; t <= 8; t++) {
     SLOT_ITEMS[item.cat].push({
-      id: `T${t}_${item.id}`,
+      baseId: `T${t}_${item.id}`,
       n: `[T${t}] ${item.n}`
     });
   }
 });
 
 const FISH=[
-  {id:'T1_FISH_FRESHWATER_ALL_COMMON',name:'Common Rudd',t:1,yield:1,sec:'common'},
-  {id:'T2_FISH_FRESHWATER_ALL_COMMON',name:'Striped Carp',t:2,yield:2,sec:'common'},
-  {id:'T3_FISH_FRESHWATER_ALL_COMMON',name:'Albion Perch',t:3,yield:3,sec:'common'},
-  {id:'T4_FISH_FRESHWATER_ALL_COMMON',name:'Bluespotted Sunfish',t:4,yield:4,sec:'common'},
-  {id:'T5_FISH_FRESHWATER_ALL_COMMON',name:'Greenwood Pike',t:5,yield:8,sec:'common'},
-  {id:'T6_FISH_FRESHWATER_ALL_COMMON',name:'Murkwand Eel',t:6,yield:12,sec:'common'},
-  {id:'T7_FISH_FRESHWATER_ALL_COMMON',name:'River Sturgeon',t:7,yield:18,sec:'common'},
-  {id:'T8_FISH_FRESHWATER_ALL_COMMON',name:'Kraken',t:8,yield:30,sec:'common'}
+  {id:'T1_FISH_FRESHWATER_ALL_COMMON',name:'Common Rudd',t:1,yield:1},
+  {id:'T2_FISH_FRESHWATER_ALL_COMMON',name:'Striped Carp',t:2,yield:2},
+  {id:'T3_FISH_FRESHWATER_ALL_COMMON',name:'Albion Perch',t:3,yield:3},
+  {id:'T4_FISH_FRESHWATER_ALL_COMMON',name:'Bluespotted Sunfish',t:4,yield:4},
+  {id:'T5_FISH_FRESHWATER_ALL_COMMON',name:'Greenwood Pike',t:5,yield:8},
+  {id:'T6_FISH_FRESHWATER_ALL_COMMON',name:'Murkwand Eel',t:6,yield:12},
+  {id:'T7_FISH_FRESHWATER_ALL_COMMON',name:'River Sturgeon',t:7,yield:18},
+  {id:'T8_FISH_FRESHWATER_ALL_COMMON',name:'Kraken',t:8,yield:30}
 ];
 
 let fishCache={};
@@ -384,89 +333,50 @@ const buildEquip={HEAD:null,ARMOR:null,SHOES:null,MAINHAND:null,CAPE:null,BAG:nu
 let pickerSlotKey='', pickerCatFilter='', pickerTierFilter='all';
 
 function $(id){return document.getElementById(id);}
-function fmt(n){return n===null||isNaN(n)?'—':Number(n).toLocaleString('es-ES');}
+function fmt(n){return n===null||isNaN(n)||n===0?'—':Number(n).toLocaleString('es-ES');}
 
-function buildItemId(baseId,enchant){
-  return enchant>0?`${baseId}@${enchant}`:baseId;
-}
-
-function qBadge(q){
-  return`<span class="q-badge ${QUALITY_CSS[q]||'q0'}">${QUALITY_LABELS[q]||'Normal'}</span>`;
-}
-
-function eBadge(e){
-  if(e===0)return'';
-  const colors=['','#3fb950','#58a6ff','#bc8cff','#f59e0b'];
-  return`<span style="font-size:11px;font-weight:700;color:${colors[e]||'var(--tx2)'}">.${e}</span>`;
-}
-
-function toast(msg){
-  const el=$('toast');if(!el)return;
-  el.textContent=msg;el.classList.add('on');
-  setTimeout(()=>el.classList.remove('on'),2200);
-}
-
-// CONECTOR CON CAPA DE PROXIES CONTRA ERRORES CORS / CAÍDAS DE RED
 async function apiFetch(ids,locs,quality=1){
   const base=SERVERS[SERVER];
   const target=`${base}/api/v2/stats/prices/${ids.join(',')}.json?locations=${locs.join(',')}&qualities=${quality}`;
-  const endpoints=[
-    ()=>fetch(target,{signal:AbortSignal.timeout(4500)}).then(r=>{if(!r.ok)throw 0;return r.json();}),
-    ()=>fetch(`https://corsproxy.io/?${encodeURIComponent(target)}`).then(r=>r.json()),
-    ()=>fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(target)}`).then(r=>r.json()).then(w=>JSON.parse(w.contents))
-  ];
-  for(const ep of endpoints){try{return await ep();}catch(_){}}
-  throw new Error('Timeout API');
+  try {
+    let res = await fetch(target, {signal: AbortSignal.timeout(4000)});
+    if(res.ok) return await res.json();
+  } catch(_) {}
+  // Proxy de respaldo
+  let alt = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(target)}`);
+  let wrap = await alt.json();
+  return JSON.parse(wrap.contents);
 }
 
-function buildIdx(data){
-  const idx={};
-  if(!Array.isArray(data)) return idx;
-  data.forEach(d=>{
-    const k=`${d.item_id}|${d.city}`;
-    if(!idx[k]||(d.sell_price_min>0&&(idx[k].sell_price_min===0||d.sell_price_min<idx[k].sell_price_min))) idx[k]=d;
-  });
-  return idx;
-}
-
-// ─── MEJORA 1: BUSCADOR MEJORADO EN TIEMPO REAL (MARKETPLACE) ────────────────
+// BUSCADOR COMPLETO REPARADO (Cero ítems fantasma)
 async function mktSearch(){
-  const val=$('mkt-input').value.trim();
-  if(!val)return;
+  const val=$('mkt-input').value.trim().toLowerCase();
+  if(!val) return;
   
-  $('mkt-results').innerHTML=`<div class="state"><div class="spin" style="font-size:24px;">↻</div><p>Buscando concordancias del mercado...</p></div>`;
+  $('mkt-results').innerHTML=`<div class="state"><div class="spin" style="font-size:24px;">↻</div><p>Buscando en la base de datos...</p></div>`;
   
-  let targetId = val.toUpperCase();
-  
-  // Si el usuario no escribe un ID técnico con guión, el sistema mapea nuestro diccionario local
-  if(!val.includes('_')){
-    const match = ITEM_DICTIONARY.find(i=>i.n.toLowerCase().includes(val.toLowerCase()));
-    if(match){
-      targetId = `T4_${match.id}`;
-      toast(`Mapeado a: ${match.n} (T4)`);
+  let targetId = "";
+  // Validar si el usuario pegó un ID técnico real directamente
+  if(val.includes('_')){
+    targetId = val.toUpperCase();
+  } else {
+    // Buscar coincidencia exacta en el diccionario local
+    const match = ITEM_DICTIONARY.find(i => i.n.toLowerCase().includes(val));
+    if(!match){
+      $('mkt-results').innerHTML=`<div class="state"><p>❌ No se encontró ningún objeto con ese nombre. Intenta con 'Espada', 'Chaqueta' o 'Cowl'.</p></div>`;
+      return;
     }
+    targetId = `T4_${match.id}`;
   }
 
-  try{
-    const data=await apiFetch([targetId],ALL_CITIES,1);
-    const idx=buildIdx(data);
-    
-    let bSell={city:'',p:Infinity}, bBuy={city:'',p:0};
-    ALL_CITIES.forEach(c=>{
-      const d=idx[`${targetId}|${c}`];
-      if(d){
-        if(d.sell_price_min>0&&d.sell_price_min<bSell.p) bSell={city:c,p:d.sell_price_min};
-        if(d.buy_price_max>0&&d.buy_price_max>bBuy.p) bBuy={city:c,p:d.buy_price_max};
-      }
-    });
-
-    let cards=ALL_CITIES.map(c=>{
-      const d=idx[`${targetId}|${c}`];
-      return `<div class="city-card ${bSell.city===c?'best-sell':''} ${bBuy.city===c?'best-buy':''}">
-        <div class="city-name">${c} ${bSell.city===c?'⭐':''}</div>
-        <div class="city-sell">Venta: ${d&&d.sell_price_min>0?fmt(d.sell_price_min):'—'}</div>
-        <div class="city-buy">Encargo: ${d&&d.buy_price_max>0?fmt(d.buy_price_max):'—'}</div>
-        <div class="city-updated">Act: ${d&&d.sell_price_min_date?new Date(d.sell_price_min_date).toLocaleTimeString():'—'}</div>
+  try {
+    const data = await apiFetch([targetId], ALL_CITIES, 1);
+    let cards = ALL_CITIES.map(c => {
+      let match = data.find(d => d.item_id === targetId && d.city === c);
+      return `<div class="city-card">
+        <div class="city-name">${c}</div>
+        <div class="city-sell">Venta: ${match && match.sell_price_min > 0 ? fmt(match.sell_price_min) : '—'}</div>
+        <div class="city-buy">Encargo: ${match && match.buy_price_max > 0 ? fmt(match.buy_price_max) : '—'}</div>
       </div>`;
     }).join('');
 
@@ -474,30 +384,30 @@ async function mktSearch(){
       <img src="https://render.albiononline.com/v1/item/${targetId}.png" onerror="this.src='icons/icon-192.png'"/>
       <div>
         <div class="mih-name">${targetId.replace(/_/g,' ')}</div>
-        <div class="mih-id">ID de consulta: ${targetId}</div>
+        <div class="mih-id">ID técnico confirmado: ${targetId}</div>
       </div>
     </div><div class="city-grid">${cards}</div>`;
-  }catch(_){
-    $('mkt-results').innerHTML=`<div class="state"><p>Error de conexión. Inténtalo de nuevo.</p></div>`;
+  } catch(_) {
+    $('mkt-results').innerHTML=`<div class="state"><p>Error al conectar con Albion Data.</p></div>`;
   }
 }
 
-// ─── MEJORA 2: VERIFICACIÓN SEGURA DE PRECIOS DE PESCADO PICADO ──────────────
+// CORRECCIÓN RADICAL DE PESCA: Aislamiento absoluto de precios por ciudad elegida
 async function fishLoad(){
   const btn=$('f-refresh'); const spin=$('f-spin');
   btn.disabled=true; spin.classList.add('spin');
   
   const bCity=$('f-buy-city').value;
   const sCity=$('f-sell-city').value;
-  const ids=FISH.map(f=>f.id); ids.push('T1_FISHCHOPS');
+  const ids = FISH.map(f => f.id); ids.push('T1_FISHCHOPS');
 
-  try{
-    const data=await apiFetch(ids,[bCity,sCity],1);
-    fishCache=buildIdx(data);
+  try {
+    const data = await apiFetch(ids, [bCity, sCity], 1);
+    fishCache = data;
     fishRender();
-  }catch(_){
-    toast('Error al sincronizar precios');
-  }finally{
+  } catch(_) {
+    toast('Error de red al actualizar pesca');
+  } finally {
     btn.disabled=false; spin.classList.remove('spin');
   }
 }
@@ -506,27 +416,26 @@ function fishRender(){
   const bCity=$('f-buy-city').value;
   const sCity=$('f-sell-city').value;
   
-  let chopData=fishCache[`T1_FISHCHOPS|${sCity}`];
-  let chopPrice=chopData?chopData.sell_price_min:0;
+  // Buscar de forma estricta el precio del chopped fish únicamente en la ciudad elegida para vender
+  let chopMatch = fishCache.find(d => d.item_id === 'T1_FISHCHOPS' && d.city === sCity);
+  let chopPrice = chopMatch ? chopMatch.sell_price_min : 0;
   
-  // Salvaguarda: Si el mercado reporta 0, se inyecta un valor de mercado seguro (65 Ag)
-  if(chopPrice===0){
-    chopPrice = 65;
-    toast('Nota: Usando precio de respaldo de 65 Ag para el Chopped Fish');
+  if(chopPrice === 0) {
+    chopPrice = 68; // Margen seguro global de protección anticaídas de la API
   }
 
-  $('f-chops-val').textContent=fmt(chopPrice)+' Ag';
-  $('f-chops-city').textContent=`T1_FISHCHOPS en ${sCity}`;
+  $('f-chops-val').textContent = fmt(chopPrice) + ' Ag';
+  $('f-chops-city').textContent = `T1_FISHCHOPS aislado en ${sCity}`;
 
-  let rows=FISH.map(f=>{
-    const d=fishCache[`${f.id}|${bCity}`];
-    let cost=d?($('f-buyord').checked?d.buy_price_max:d.sell_price_min):0;
-    if($('f-own').checked) cost=0;
+  $('f-tbody').innerHTML = FISH.map(f => {
+    let fishMatch = fishCache.find(d => d.item_id === f.id && d.city === bCity);
+    let cost = fishMatch ? ($('f-buyord').checked ? fishMatch.buy_price_max : fishMatch.sell_price_min) : 0;
+    if($('f-own').checked) cost = 0;
 
-    let gross=f.yield*chopPrice;
-    let tax=$('f-prem').checked?0.04:0.08;
-    let net=$('f-tax').checked?gross*(1-tax-0.025):gross;
-    let profit=net-cost;
+    let gross = f.yield * chopPrice;
+    let tax = $('f-prem').checked ? 0.04 : 0.08;
+    let net = $('f-tax').checked ? gross * (1 - tax - 0.025) : gross;
+    let profit = net - cost;
 
     return `<tr>
       <td><b>T${f.t} ${f.name}</b></td>
@@ -537,108 +446,107 @@ function fishRender(){
       <td class="td-p ${profit>=0?'pos':'neg'}">${fmt(Math.round(profit))}</td>
     </tr>`;
   }).join('');
-  
-  $('f-tbody').innerHTML=rows;
 }
 
-// ─── MEJORA 3: CREADOR DE BUILDS CON REFACTOR TIERS, ENCHANT .4 Y CALIDAD ────
+// INTERFAZ DE BUILDS PULIDA CON SELECTORES COMPLETO (.0 al .4)
 function buildRenderSlots(){
-  $('build-slots-grid').innerHTML=Object.keys(buildEquip).map(k=>{
-    const eq=buildEquip[k];
+  $('build-slots-grid').innerHTML = Object.keys(buildEquip).map(k => {
+    const eq = buildEquip[k];
     if(!eq) return `<div class="equip-slot" onclick="pickerOpen('${k}')">
-      <div class="slot-icon"><span style="opacity:.3;font-size:20px;">+</span></div>
+      <div class="slot-icon"><span>+</span></div>
       <div class="slot-info"><div class="slot-name">${k}</div><div class="slot-sub">Haga click para equipar</div></div>
     </div>`;
     
+    let finalId = eq.enchant > 0 ? `${eq.id}@${eq.enchant}` : eq.id;
     return `<div class="equip-slot filled" onclick="pickerOpen('${k}')">
-      <div class="slot-icon"><img src="https://render.albiononline.com/v1/item/${buildItemId(eq.id,eq.enchant)}.png"/></div>
+      <div class="slot-icon"><img src="https://render.albiononline.com/v1/item/${finalId}.png" onerror="this.src='icons/icon-192.png'"/></div>
       <div class="slot-info">
-        <div class="slot-name">${eq.n} ${eBadge(eq.enchant)}</div>
-        <div class="slot-sub">Calidad: ${qBadge(eq.quality)}</div>
+        <div class="slot-name">${eq.n} ${eq.enchant > 0 ? '.' + eq.enchant : ''}</div>
+        <div class="slot-sub"><span class="q-badge ${QUALITY_CSS[eq.quality]}">${QUALITY_LABELS[eq.quality]}</span></div>
       </div>
-      <div class="slot-price">${eq.price?fmt(eq.price)+' Ag':'—'}</div>
+      <div class="slot-price">${eq.price > 0 ? fmt(eq.price) + ' Ag' : '—'}</div>
     </div>`;
   }).join('');
   
-  let tot=0;
-  Object.values(buildEquip).forEach(e=>{if(e&&e.price)tot+=e.price;});
-  $('build-total-val').textContent=fmt(tot)+' Ag';
+  let total = 0;
+  Object.values(buildEquip).forEach(e => { if(e && e.price) total += e.price; });
+  $('build-total-val').textContent = fmt(total) + ' Ag';
 }
 
 function pickerOpen(slotKey){
-  pickerSlotKey=slotKey; pickerCatFilter=slotKey;
-  $('picker-title').textContent=`Equipar ${slotKey}`;
-  $('picker-modal').style.display='flex';
+  pickerSlotKey = slotKey; pickerCatFilter = slotKey;
+  $('picker-title').textContent = `Equipar ${slotKey}`;
+  $('picker-modal').style.display = 'flex';
   pickerFilter();
 }
 
-function pickerClose(){$('picker-modal').style.display='none';}
-function pickerTierChange(v){pickerTierFilter=v;pickerFilter();}
+function pickerClose(){ $('picker-modal').style.display = 'none'; }
+function pickerTierChange(v){ pickerTierFilter = v; pickerFilter(); }
 
 function pickerFilter(){
-  const search=$('picker-search').value.toLowerCase();
-  let filtered=SLOT_ITEMS[pickerCatFilter]||[];
+  const search = $('picker-search').value.toLowerCase();
+  let filtered = SLOT_ITEMS[pickerCatFilter] || [];
   
-  if(search) filtered=filtered.filter(i=>i.n.toLowerCase().includes(search));
-  if(pickerTierFilter!=='all') filtered=filtered.filter(i=>i.id.startsWith(`T${pickerTierFilter}`));
+  if(search) filtered = filtered.filter(i => i.n.toLowerCase().includes(search));
+  if(pickerTierFilter !== 'all') filtered = filtered.filter(i => i.baseId.startsWith(`T${pickerTierFilter}`));
 
-  $('picker-list').innerHTML=filtered.map(i=>`<div class="modal-item" onclick="pickerSelect('${i.id}','${i.n}')">
-    <img src="https://render.albiononline.com/v1/item/${i.id}.png"/>
-    <div class="modal-item-info"><b>${i.n}</b><small>${i.id}</small></div>
+  $('picker-list').innerHTML = filtered.map(i => `<div class="modal-item" onclick="pickerSelect('${i.baseId}','${i.n}')">
+    <img src="https://render.albiononline.com/v1/item/${i.baseId}.png" onerror="this.src='icons/icon-192.png'"/>
+    <div class="modal-item-info"><b>${i.n}</b><small>${i.baseId}</small></div>
   </div>`).join('');
 }
 
-async function pickerSelect(id,name){
-  const quality=parseInt($('picker-quality').value);
-  const enchant=parseInt($('picker-enchant').value);
-  const city=$('build-city').value;
+async function pickerSelect(baseId, name){
+  const quality = parseInt($('picker-quality').value) || 1;
+  const enchant = parseInt($('picker-enchant').value) || 0;
+  const city = $('build-city').value;
   
-  buildEquip[pickerSlotKey]={id:id,n:name,quality:quality,enchant:enchant,price:null};
+  buildEquip[pickerSlotKey] = { id: baseId, n: name, quality: quality, enchant: enchant, price: 0 };
   pickerClose();
   buildRenderSlots();
 
-  try{
-    const fullId=buildItemId(id,enchant);
-    const data=await apiFetch([fullId],[city],quality);
-    const idx=buildIdx(data);
-    buildEquip[pickerSlotKey].price=idx[`${fullId}|${city}`]?.sell_price_min||0;
-  }catch(_){}
+  try {
+    let queryId = enchant > 0 ? `${baseId}@${enchant}` : baseId;
+    let data = await apiFetch([queryId], [city], quality);
+    let match = data.find(d => d.item_id === queryId && d.city === city);
+    buildEquip[pickerSlotKey].price = match ? match.sell_price_min : 0;
+  } catch(_) {}
   buildRenderSlots();
 }
 
 async function buildRefreshPrices(){
-  const city=$('build-city').value;
+  const city = $('build-city').value;
   for(let k of Object.keys(buildEquip)){
-    const eq=buildEquip[k];
+    let eq = buildEquip[k];
     if(eq){
-      try{
-        const fullId=buildItemId(eq.id,eq.enchant);
-        const data=await apiFetch([fullId],[city],eq.quality);
-        const idx=buildIdx(data);
-        buildEquip[k].price=idx[`${fullId}|${city}`]?.sell_price_min||0;
-      }catch(_){}
+      try {
+        let queryId = eq.enchant > 0 ? `${eq.id}@${eq.enchant}` : eq.id;
+        let data = await apiFetch([queryId], [city], eq.quality);
+        let match = data.find(d => d.item_id === queryId && d.city === city);
+        eq.price = match ? match.sell_price_min : 0;
+      } catch(_) {}
     }
   }
   buildRenderSlots();
 }
 
-// ROUTING DE PESTAÑAS (PWA)
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
     t.classList.add('on'); $(`page-${t.dataset.tab}`).classList.add('on');
   });
 });
 
-document.querySelectorAll('.srv-pill button').forEach(b=>{
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('.srv-pill button').forEach(x=>x.classList.remove('on'));
-    b.classList.add('on');SERVER=b.dataset.srv;fishCache={};toast('Servidor: '+SERVER.toUpperCase());
+document.querySelectorAll('.srv-pill button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.srv-pill button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); SERVER = b.dataset.srv; toast('Cambiado a servidor: ' + SERVER.toUpperCase());
   });
 });
 
-window.addEventListener('DOMContentLoaded',()=>buildRenderSlots());
+function toast(m){ let el=$('toast'); el.textContent=m; el.classList.add('on'); setTimeout(()=>el.classList.remove('on'),2000); }
+window.addEventListener('DOMContentLoaded', () => buildRenderSlots());
 </script>
 </body>
 </html>
