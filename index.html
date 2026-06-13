@@ -46,14 +46,15 @@ button:disabled{opacity:0.5;cursor:not-allowed;}
 .row>div{flex:1;min-width:110px;}
 .state{text-align:center;padding:40px 16px;color:var(--tx2);}
 .state .ico{font-size:32px;margin-bottom:8px;}
-.city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px;}
+.city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-top:12px;}
 .city-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:12px;}
 .city-card.best-sell{border-color:var(--grn);background:var(--grn-d);}
 .city-card.best-buy{border-color:var(--blu);background:rgba(88,166,255,0.08);}
 .city-name{font-size:14px;font-weight:700;margin-bottom:6px;}
 .city-sell,.city-buy{font-size:12px;margin-bottom:2px;color:var(--tx2);}
 .city-sell b,.city-buy b{color:var(--tx);font-weight:700;}
-.city-updated{font-size:10px;color:var(--tx3);margin-top:6px;}
+.city-updated{font-size:10px;color:var(--tx3);margin-top:5px;}
+.city-nodata{font-size:11px;color:var(--tx3);margin-top:4px;font-style:italic;}
 .market-item-header{display:flex;align-items:center;gap:12px;background:var(--s2);padding:12px;border-radius:10px;border:1px solid var(--bd);margin-bottom:12px;}
 .market-item-header img{width:52px;height:52px;object-fit:contain;}
 .mih-name{font-size:15px;font-weight:700;}
@@ -61,7 +62,7 @@ button:disabled{opacity:0.5;cursor:not-allowed;}
 .suggest{background:var(--s1);border:1px solid var(--bd);border-radius:10px;margin-bottom:12px;overflow:hidden;max-height:320px;overflow-y:auto;}
 .sg-item{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--bd2);transition:background .15s;}
 .sg-item:last-child{border-bottom:none;}
-.sg-item:hover{background:var(--s2);}
+.sg-item:hover,.sg-item:active{background:var(--s2);}
 .sg-item img{width:34px;height:34px;object-fit:contain;flex-shrink:0;}
 .sg-info{min-width:0;}
 .sg-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -70,7 +71,7 @@ button:disabled{opacity:0.5;cursor:not-allowed;}
 .tbl-scroll{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;text-align:left;font-size:13px;}
 th{background:var(--s3);color:var(--tx2);padding:10px 12px;font-weight:600;font-size:12px;white-space:nowrap;}
-td{padding:10px 12px;border-top:1px solid var(--bd2);}
+td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
 .td-n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
 .td-p{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;}
 .pos{color:var(--grn);}
@@ -95,44 +96,45 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
 .slot-label{font-size:10px;color:var(--tx3);text-transform:uppercase;font-weight:700;letter-spacing:.5px;}
 .slot-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .slot-sub{font-size:11px;color:var(--tx2);margin-top:1px;}
-.slot-price{font-size:13px;font-weight:700;text-align:right;white-space:nowrap;}
-.slot-clear{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--tx3);font-size:16px;cursor:pointer;line-height:1;}
+.slot-price{font-size:13px;font-weight:700;text-align:right;white-space:nowrap;min-width:60px;}
+.slot-clear{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--tx3);font-size:16px;cursor:pointer;line-height:1;padding:2px 4px;}
 .slot-clear:hover{color:var(--red);}
 .q-badge{font-size:10px;padding:1px 5px;border-radius:4px;font-weight:700;}
+.q0{background:var(--s3);color:var(--tx3);}
 .q1{background:var(--s3);color:var(--tx2);}
 .q2{background:rgba(88,166,255,0.15);color:var(--blu);}
 .q3{background:var(--grn-d);color:var(--grn);}
 .q4{background:rgba(188,140,255,0.15);color:var(--pur);}
 .q5{background:var(--acc-d);color:var(--acc);}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;display:none;align-items:flex-end;justify-content:center;}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;display:none;align-items:flex-end;justify-content:center;}
 .modal.on{display:flex;}
 .modal-content{background:var(--s1);border:1px solid var(--bd);border-radius:14px 14px 0 0;width:100%;max-width:520px;height:90vh;display:flex;flex-direction:column;overflow:hidden;}
 @media(min-width:520px){.modal{align-items:center;}.modal-content{border-radius:14px;height:85vh;}}
 .modal-header{padding:14px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;}
 .modal-cfg{padding:12px;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;flex-direction:column;gap:8px;}
 .modal-body{padding:12px 16px;overflow-y:auto;flex:1;}
-.modal-item{display:flex;align-items:center;gap:12px;padding:8px;border-radius:8px;cursor:pointer;margin-bottom:4px;transition:background .15s;}
-.modal-item:hover{background:var(--s2);}
+.modal-item{display:flex;align-items:center;gap:12px;padding:8px;border-radius:8px;cursor:pointer;margin-bottom:2px;transition:background .15s;}
+.modal-item:hover,.modal-item:active{background:var(--s2);}
 .modal-item img{width:38px;height:38px;object-fit:contain;flex-shrink:0;}
 .modal-item-info{display:flex;flex-direction:column;min-width:0;}
-.modal-item-info b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.modal-item-info b{font-size:13px;overflow:hidden;text-overflow:ellipsis;}
 .modal-item-info small{font-size:11px;color:var(--tx2);font-family:monospace;}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-20px);background:#238636;color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;visibility:hidden;transition:all .3s;z-index:300;box-shadow:0 4px 12px rgba(0,0,0,0.5);max-width:90vw;text-align:center;}
 .toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
 .hint{font-size:11px;color:var(--tx3);margin-top:8px;text-align:center;}
-/* Fish type tabs */
-.fish-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
-.fish-tab{background:var(--s2);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--tx2);cursor:pointer;transition:all .2s;}
-.fish-tab.on{background:var(--acc-d);border-color:var(--acc);color:var(--acc);}
-/* Chops summary cards */
-.chops-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px;}
-.chop-card{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;}
-.chop-tier{font-size:11px;font-weight:700;color:var(--acc);margin-bottom:2px;}
-.chop-price{font-size:14px;font-weight:800;}
-.chop-city{font-size:10px;color:var(--tx3);margin-top:2px;}
-/* Info banner */
-.info-banner{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--tx2);margin-bottom:12px;line-height:1.5;}
+.chip{display:inline-block;background:var(--s3);border:1px solid var(--bd);border-radius:14px;padding:2px 8px;font-size:11px;color:var(--tx2);margin:2px;cursor:pointer;transition:all .15s;}
+.chip:hover,.chip.active{border-color:var(--acc);color:var(--acc);background:var(--acc-d);}
+/* Fish */
+.chops-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;}
+@media(min-width:480px){.chops-grid{grid-template-columns:repeat(8,1fr);}}
+.chop-card{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:8px 6px;text-align:center;}
+.chop-tier{font-size:10px;font-weight:700;color:var(--acc);margin-bottom:3px;}
+.chop-price{font-size:12px;font-weight:800;word-break:break-all;}
+.chop-nodata{font-size:10px;color:var(--tx3);}
+.info-banner{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--tx2);margin-bottom:12px;line-height:1.6;}
 .info-banner strong{color:var(--tx);}
+/* Tier badge */
+.tier-badge{font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(245,158,11,.15);color:var(--acc);margin-right:4px;}
 </style>
 </head>
 <body>
@@ -149,10 +151,10 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
 <!-- ============ MERCADO ============ -->
 <div id="page-mkt" class="page on">
   <h2>Buscador del Mercado</h2>
-  <p class="sub">Busca cualquier objeto del juego en español o inglés. Muestra precios en tiempo real por ciudad con Tier, encantamiento y calidad.</p>
+  <p class="sub">Busca cualquier objeto en español o inglés. Precios en tiempo real en todas las ciudades.</p>
 
   <div class="search-box">
-    <input type="text" id="mkt-input" placeholder="Ej: espada, capucha, esturión, capa..." autocomplete="off"/>
+    <input type="text" id="mkt-input" placeholder="Ej: espada, capa, armadura, poción..." autocomplete="off" spellcheck="false"/>
     <button class="btn-main" onclick="mktChooseFirst()">🔍</button>
   </div>
 
@@ -165,19 +167,16 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
       <label class="fld-lbl">Encantamiento</label>
       <select id="mkt-ench" onchange="mktOnFilterChange()">
         <option value="0">.0 (Base)</option>
-        <option value="1">.1</option>
-        <option value="2">.2</option>
-        <option value="3">.3</option>
-        <option value="4">.4</option>
+        <option value="1">.1</option><option value="2">.2</option>
+        <option value="3">.3</option><option value="4">.4</option>
       </select>
     </div>
     <div>
       <label class="fld-lbl">Calidad</label>
       <select id="mkt-qual" onchange="mktOnFilterChange()">
-        <option value="1">Normal</option>
-        <option value="2">Bueno</option>
-        <option value="3">Notable</option>
-        <option value="4">Sobresaliente</option>
+        <option value="0">Todas</option>
+        <option value="1">Normal</option><option value="2">Bueno</option>
+        <option value="3">Notable</option><option value="4">Sobresaliente</option>
         <option value="5">Obra Maestra</option>
       </select>
     </div>
@@ -185,54 +184,54 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
 
   <div id="mkt-suggest"></div>
   <div id="mkt-results">
-    <div class="state"><div class="ico">📊</div><p>Escribe el nombre de un objeto para buscar en el catálogo completo del juego.</p></div>
+    <div class="state"><div class="ico">📊</div><p>Escribe el nombre de un objeto para buscar.</p></div>
   </div>
 </div>
 
 <!-- ============ PESCA ============ -->
 <div id="page-fish" class="page">
-  <h2>Pescado Picado (Chopped Fish)</h2>
-  <p class="sub">Cada tier de pez produce su propio tier de Pescado Picado. Calcula la ganancia por pez según rendimiento real del juego.</p>
+  <h2>Pescado Picado (Fishchops)</h2>
+  <p class="sub">Calcula la ganancia al picar peces. Cada tier de pez produce Fishchops de su mismo tier.</p>
 
   <div class="info-banner">
-    <strong>¿Cómo funciona?</strong> Cada pez se convierte en Fishchops de su mismo tier (T4 Pez → T4 Fishchops). El rendimiento es el número de chops por pez. Precio obtenido de la API en tiempo real.
+    <strong>Cómo funciona:</strong> Al picar un pez obtienes Fishchops del mismo tier.
+    El rendimiento (chops/pez) escala por rareza: Común ×1, Infrecuente ×2, Raro ×6, Legendario ×18 relativo al tier.
+    Los precios de peces crudos suelen ser 0 en el mercado (se pescan directamente).
   </div>
 
-  <div class="row" style="margin-bottom:12px;">
+  <div class="row" style="margin-bottom:10px;">
     <div>
-      <label class="fld-lbl">Tipo de pescado</label>
+      <label class="fld-lbl">Tipo de pez</label>
       <select id="f-fishtype" onchange="fishTypeChange()">
-        <option value="freshwater">Agua Dulce (Freshwater)</option>
-        <option value="saltwater">Agua Salada (Saltwater)</option>
-        <option value="uncommon">Infrecuente (Uncommon)</option>
-        <option value="rare">Raro (Rare)</option>
-        <option value="legendary">Legendario (Legendary)</option>
+        <option value="fw_common">Agua Dulce — Común</option>
+        <option value="sw_common">Agua Salada — Común</option>
+        <option value="uncommon">Infrecuente (×2)</option>
+        <option value="rare">Raro (×6)</option>
+        <option value="legendary">Legendario (×18)</option>
       </select>
     </div>
   </div>
 
-  <!-- Precio de Fishchops por tier -->
-  <p class="fld-lbl" style="margin-bottom:8px;">Precios de Fishchops por Tier (ciudad de venta)</p>
-  <div class="row" style="margin-bottom:8px;">
+  <div class="row" style="margin-bottom:10px;">
     <div>
       <label class="fld-lbl">Vender Fishchops en</label>
       <select id="f-sell-city" onchange="fishLoad()"></select>
     </div>
     <div>
-      <label class="fld-lbl">Comprar peces en</label>
+      <label class="fld-lbl">Comprar peces en (opcional)</label>
       <select id="f-buy-city" onchange="fishRender()"></select>
     </div>
   </div>
 
-  <div class="chops-grid" id="chops-prices-grid">
-    <!-- filled dynamically -->
-  </div>
+  <!-- Fishchops prices T1-T8 -->
+  <p class="fld-lbl" style="margin-bottom:6px;">Precio actual de Fishchops por tier en <span id="chops-city-label">—</span></p>
+  <div class="chops-grid" id="chops-prices-grid"></div>
 
   <div class="cfg-box">
     <label class="cfg-i"><input type="checkbox" id="f-buyord" onchange="fishRender()"/>Usar Orden de Compra (peces)</label>
-    <label class="cfg-i"><input type="checkbox" id="f-tax" checked onchange="fishRender()"/>Aplicar Tasa Mercado (8% / 4%)</label>
-    <label class="cfg-i"><input type="checkbox" id="f-prem" checked onchange="fishRender()"/>Tengo Premium</label>
-    <label class="cfg-i"><input type="checkbox" id="f-own" onchange="fishRender()"/>Pescado propio (costo 0)</label>
+    <label class="cfg-i"><input type="checkbox" id="f-tax" checked onchange="fishRender()"/>Aplicar tasa de mercado</label>
+    <label class="cfg-i"><input type="checkbox" id="f-prem" checked onchange="fishRender()"/>Premium (tasa 4%, sin premium 8%)</label>
+    <label class="cfg-i"><input type="checkbox" id="f-own" onchange="fishRender()"/>Peces propios (costo = 0)</label>
   </div>
 
   <button class="btn-main" id="f-refresh" onclick="fishLoad()" style="width:100%;justify-content:center;margin-bottom:12px;">
@@ -246,33 +245,40 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
           <th>Pez</th>
           <th class="td-n">Chops/pez</th>
           <th class="td-n">Costo pez</th>
-          <th class="td-n">Precio Chop</th>
+          <th class="td-n">Precio Chop (Tn)</th>
           <th class="td-n">Ingreso bruto</th>
-          <th class="td-p">Ganancia</th>
+          <th class="td-p">Ganancia neta</th>
         </tr>
       </thead>
       <tbody id="f-tbody">
-        <tr><td colspan="6" class="state">Presiona "Sincronizar Precios" para cargar datos.</td></tr>
+        <tr><td colspan="6" class="state">Presiona "Sincronizar Precios" para cargar datos en tiempo real.</td></tr>
       </tbody>
     </table>
   </div></div>
-  <p class="hint">Ganancia = (chops × precio_chop × (1 − tasa)) − costo_pez. Tasa: 8% sin premium, 4% con premium.</p>
+  <p class="hint">Tasa mercado: 2.5% uso + 4% premium / 8% sin premium. Ganancia = ingreso × (1−tasa) − costo pez.</p>
 </div>
 
 <!-- ============ BUILDS ============ -->
 <div id="page-build" class="page">
   <h2>Creador de Builds</h2>
-  <p class="sub">Arma tu set completo. Elige Tier (T1–T8), encantamiento (.0–.4) y calidad. Precios en tiempo real de la ciudad elegida.</p>
+  <p class="sub">Arma tu equipo completo con precios en tiempo real. T1–T8, encantamiento .0–.4, todas las calidades.</p>
 
-  <div style="margin-bottom:12px;">
-    <label class="fld-lbl">Ciudad para valuar el set</label>
-    <select id="build-city" onchange="buildRefreshPrices()"></select>
+  <div class="row" style="margin-bottom:12px;">
+    <div>
+      <label class="fld-lbl">Ciudad para precios</label>
+      <select id="build-city" onchange="buildRefreshPrices()"></select>
+    </div>
+    <div style="display:flex;align-items:flex-end;">
+      <button class="btn-main" onclick="buildRefreshPrices()" style="width:100%;justify-content:center;">
+        <span id="build-spin">↻</span> Actualizar
+      </button>
+    </div>
   </div>
 
   <div class="sum-card" style="margin-bottom:16px;border-color:var(--acc-g);">
-    <div class="sum-lbl">Valor Total Estimado de la Build</div>
+    <div class="sum-lbl">Valor Total del Set</div>
     <div class="sum-val" id="build-total-val">0 Ag</div>
-    <div class="sum-sub">Suma del precio de venta más bajo de cada pieza</div>
+    <div class="sum-sub" id="build-total-sub">Precio mínimo de venta por pieza</div>
   </div>
 
   <div class="equip-grid" id="build-slots-grid"></div>
@@ -285,15 +291,15 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
   <div class="tab" data-tab="build"><i>⚔️</i>Builds</div>
 </nav>
 
-<!-- ============ PICKER MODAL ============ -->
+<!-- PICKER MODAL -->
 <div class="modal" id="picker-modal">
   <div class="modal-content">
     <div class="modal-header">
       <h3 id="picker-title" style="font-size:15px;font-weight:700;">Equipar Pieza</h3>
-      <button onclick="pickerClose()" style="background:none;border:none;color:var(--tx2);font-size:24px;cursor:pointer;line-height:1;">&times;</button>
+      <button onclick="pickerClose()" style="background:none;border:none;color:var(--tx2);font-size:24px;cursor:pointer;line-height:1;padding:4px 8px;">&times;</button>
     </div>
     <div class="modal-cfg">
-      <input type="text" id="picker-search" placeholder="Buscar en esta categoría..." oninput="pickerFilter()" autocomplete="off"/>
+      <input type="text" id="picker-search" placeholder="Buscar objeto..." oninput="pickerFilter()" autocomplete="off" spellcheck="false"/>
       <div class="row">
         <div>
           <label class="fld-lbl">Tier</label>
@@ -307,7 +313,7 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
         <div>
           <label class="fld-lbl">Encant.</label>
           <select id="picker-enchant">
-            <option value="0">.0</option><option value="1">.1</option>
+            <option value="0">.0 — Base</option><option value="1">.1</option>
             <option value="2">.2</option><option value="3">.3</option><option value="4">.4</option>
           </select>
         </div>
@@ -330,209 +336,211 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);}
 <script>
 'use strict';
 
-/* ===== Configuración ===== */
-const SERVERS={
-  west:'https://west.albion-online-data.com',
-  europe:'https://europe.albion-online-data.com',
-  east:'https://east.albion-online-data.com'
+/* ───────── Configuración ───────── */
+const SERVERS = {
+  west:   'https://west.albion-online-data.com',
+  europe: 'https://europe.albion-online-data.com',
+  east:   'https://east.albion-online-data.com'
 };
-let SERVER='west';
+let SERVER = 'west';
 
-const ALL_CITIES=['Lymhurst','Bridgewatch','Martlock','Fort Sterling','Thetford','Caerleon','Brecilien'];
+const ALL_CITIES = ['Lymhurst','Bridgewatch','Martlock','Fort Sterling','Thetford','Caerleon','Brecilien'];
 
-const QUALITY_LABELS=['','Normal','Bueno','Notable','Sobresaliente','Obra Maestra'];
-const QUALITY_CSS=['','q1','q2','q3','q4','q5'];
+const QUALITY_LABELS = ['','Normal','Bueno','Notable','Sobresaliente','Obra Maestra'];
+const QUALITY_CSS    = ['q0','q1','q2','q3','q4','q5'];
 
-const SLOT_LABELS={
-  MAINHAND:'Arma',OFFHAND:'Mano Sec.',HEAD:'Cabeza',
-  ARMOR:'Pecho',SHOES:'Botas',CAPE:'Capa',
-  BAG:'Bolso',MOUNT:'Montura',FOOD:'Comida',POTION:'Poción'
+const SLOT_LABELS = {
+  MAINHAND:'Arma', OFFHAND:'Mano Sec.', HEAD:'Cabeza',
+  ARMOR:'Pecho',   SHOES:'Botas',       CAPE:'Capa',
+  BAG:'Bolso',     MOUNT:'Montura',     FOOD:'Comida', POTION:'Poción'
 };
-const BUILD_SLOTS=['MAINHAND','OFFHAND','HEAD','ARMOR','SHOES','CAPE','BAG'];
+const BUILD_SLOTS = ['MAINHAND','OFFHAND','HEAD','ARMOR','SHOES','CAPE','BAG'];
 
-/* ===== Datos de peces CORRECTOS =====
-   Fuente: Albion Online wiki / datos verificados del juego.
-   Rendimiento real = número de Fishchops que produce cada pez al picar.
-   Tipos: freshwater, saltwater, uncommon, rare, legendary
-   Cada tier de pez produce Fishchops del MISMO tier.
-*/
+/* ───────── Datos de Pesca CORREGIDOS ───────────────────────────────────────
+   IDs verificados con ao-bin-dumps (exportación oficial del juego).
+   Rendimiento = número de Fishchops del MISMO tier producidos por cada pez.
+   Fuente yields: wiki.albiononline.com/wiki/Chopped_Fish (valores de nutrición)
+   
+   Común:        T1=2, T2=4, T3=8,  T4=16, T5=32,  T6=64,  T7=128,  T8=256
+   Infrecuente:  —     —     —      T4=32, T5=64,  T6=128, T7=256,  T8=512
+   Raro:         —     —     —      T4=96, T5=192, T6=384, T7=768,  T8=1536
+   Legendario:   —     —     —      T4=288,T5=576, T6=1152,T7=2304, T8=4608
+──────────────────────────────────────────────────────────────────────────── */
 const FISH_TYPES = {
-  freshwater: [
-    {id:'T1_FISHFRESHWATER_RUDD',      en:'Common Rudd',          es:'Carpín común',        t:1, yield:1},
-    {id:'T2_FISHFRESHWATER_CARP',      en:'Striped Carp',         es:'Carpa rayada',        t:2, yield:2},
-    {id:'T3_FISHFRESHWATER_PERCH',     en:'Albion Perch',         es:'Perca de Albion',     t:3, yield:4},
-    {id:'T4_FISHFRESHWATER_PIKE',      en:'Bluescale Pike',       es:'Lucio escama azul',   t:4, yield:8},
-    {id:'T5_FISHFRESHWATER_TROUT',     en:'Spotted Trout',        es:'Trucha manchada',     t:5, yield:16},
-    {id:'T6_FISHFRESHWATER_ZANDER',    en:'Brightscale Zander',   es:'Zander escama brillante',t:6,yield:32},
-    {id:'T7_FISHFRESHWATER_CATFISH',   en:'Danglemouth Catfish',  es:'Siluro bocudo',       t:7, yield:64},
-    {id:'T8_FISHFRESHWATER_STURGEON',  en:'River Sturgeon',       es:'Esturión de río',     t:8, yield:128},
+  fw_common: [
+    {id:'T1_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:1, yield:2},
+    {id:'T2_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:2, yield:4},
+    {id:'T3_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:3, yield:8},
+    {id:'T4_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:4, yield:16},
+    {id:'T5_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:5, yield:32},
+    {id:'T6_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:6, yield:64},
+    {id:'T7_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:7, yield:128},
+    {id:'T8_FISHFRESHWATER_ALL_COMMON', es:'Pez agua dulce común', en:'Common Freshwater Fish', t:8, yield:256},
   ],
-  saltwater: [
-    {id:'T1_FISHSALTWATER_MUSSEL',     en:'Shallowshore Mussel',  es:'Mejillón orilla',     t:1, yield:1},
-    {id:'T2_FISHSALTWATER_HERRING',    en:'Common Herring',       es:'Arenque común',       t:2, yield:2},
-    {id:'T3_FISHSALTWATER_SNAPPER',    en:'Whitefog Snapper',     es:'Pargo niebla blanca', t:3, yield:4},
-    {id:'T4_FISHSALTWATER_CRAB',       en:'Greenriver Crab',      es:'Cangrejo río verde',  t:4, yield:8},
-    {id:'T5_FISHSALTWATER_SQUID',      en:'Midwater Squid',       es:'Calamar aguas medias',t:5, yield:16},
-    {id:'T6_FISHSALTWATER_EEL',        en:'Deepwater Eel',        es:'Anguila aguas profundas',t:6,yield:32},
-    {id:'T7_FISHSALTWATER_OCTOPUS',    en:'Rushwater Octopus',    es:'Pulpo aguas rápidas', t:7, yield:64},
-    {id:'T8_FISHSALTWATER_SHARK',      en:'Elder Shark',          es:'Tiburón ancestral',   t:8, yield:128},
+  sw_common: [
+    {id:'T1_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:1, yield:2},
+    {id:'T2_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:2, yield:4},
+    {id:'T3_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:3, yield:8},
+    {id:'T4_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:4, yield:16},
+    {id:'T5_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:5, yield:32},
+    {id:'T6_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:6, yield:64},
+    {id:'T7_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:7, yield:128},
+    {id:'T8_FISHSALTWATER_ALL_COMMON', es:'Pez agua salada común', en:'Common Saltwater Fish', t:8, yield:256},
   ],
   uncommon: [
-    {id:'T4_FISHUNCOMMON_BREAM',       en:'Uncommon Bream',       es:'Brema infrecuente',   t:4, yield:8},
-    {id:'T5_FISHUNCOMMON_PERCH',       en:'Uncommon Perch',       es:'Perca infrecuente',   t:5, yield:16},
-    {id:'T6_FISHUNCOMMON_PIKE',        en:'Uncommon Pike',        es:'Lucio infrecuente',   t:6, yield:32},
-    {id:'T7_FISHUNCOMMON_ZANDER',      en:'Uncommon Zander',      es:'Zander infrecuente',  t:7, yield:64},
-    {id:'T8_FISHUNCOMMON_CATFISH',     en:'Uncommon Catfish',     es:'Siluro infrecuente',  t:8, yield:128},
+    {id:'T4_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:4, yield:32},
+    {id:'T5_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:5, yield:64},
+    {id:'T6_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:6, yield:128},
+    {id:'T7_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:7, yield:256},
+    {id:'T8_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:8, yield:512},
   ],
   rare: [
-    {id:'T4_FISHRARE_BREAM',           en:'Rare Bream',           es:'Brema rara',          t:4, yield:8},
-    {id:'T5_FISHRARE_PERCH',           en:'Rare Perch',           es:'Perca rara',           t:5, yield:16},
-    {id:'T6_FISHRARE_PIKE',            en:'Rare Pike',            es:'Lucio raro',           t:6, yield:32},
-    {id:'T7_FISHRARE_ZANDER',          en:'Rare Zander',          es:'Zander raro',          t:7, yield:64},
-    {id:'T8_FISHRARE_CATFISH',         en:'Rare Catfish',         es:'Siluro raro',          t:8, yield:128},
+    {id:'T4_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:4, yield:96},
+    {id:'T5_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:5, yield:192},
+    {id:'T6_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:6, yield:384},
+    {id:'T7_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:7, yield:768},
+    {id:'T8_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:8, yield:1536},
   ],
   legendary: [
-    {id:'T4_FISHLEGENDARY_LOCHMONSTER',en:'Loch Monster',         es:'Monstruo del lago',   t:4, yield:8},
-    {id:'T5_FISHLEGENDARY_KRAKEN',     en:'Young Kraken',         es:'Kraken joven',         t:5, yield:16},
-    {id:'T6_FISHLEGENDARY_MERMAID',    en:'Mermaid',              es:'Sirena',               t:6, yield:32},
-    {id:'T7_FISHLEGENDARY_GIANT_CRAB', en:'Giant Crab',           es:'Cangrejo gigante',     t:7, yield:64},
-    {id:'T8_FISHLEGENDARY_SEA_SERPENT',en:'Sea Serpent',          es:'Serpiente de mar',     t:8, yield:128},
+    {id:'T4_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:4, yield:288},
+    {id:'T5_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:5, yield:576},
+    {id:'T6_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:6, yield:1152},
+    {id:'T7_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:7, yield:2304},
+    {id:'T8_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:8, yield:4608},
   ]
 };
 
-/* IDs de Fishchops por tier (T1-T8) */
-const FISHCHOPS_IDS = [
-  'T1_FISHCHOPS','T2_FISHCHOPS','T3_FISHCHOPS','T4_FISHCHOPS',
-  'T5_FISHCHOPS','T6_FISHCHOPS','T7_FISHCHOPS','T8_FISHCHOPS'
-];
+const FISHCHOPS_IDS = ['T1_FISHCHOPS','T2_FISHCHOPS','T3_FISHCHOPS','T4_FISHCHOPS',
+                       'T5_FISHCHOPS','T6_FISHCHOPS','T7_FISHCHOPS','T8_FISHCHOPS'];
 
-/* ===== Estado ===== */
-let ITEMS=[];
-let ITEMS_READY=false;
-let fishCache=[];          // precios de peces crudos
-let fishChopsCache=[];     // precios de Fishchops T1-T8
-let currentFishType='freshwater';
-const buildEquip={};
-BUILD_SLOTS.forEach(s=>buildEquip[s]=null);
-let pickerSlotKey='';
-let mktSelected=null;
+/* ───────── Estado ───────── */
+let ITEMS = [];
+let ITEMS_READY = false;
+let fishChopsCache = [];
+let fishRawCache   = [];
+let currentFishType = 'fw_common';
+const buildEquip = {};
+BUILD_SLOTS.forEach(s => buildEquip[s] = null);
+let pickerSlotKey = '';
+let mktSelected   = null;
 
-/* ===== Helpers ===== */
-function $(id){return document.getElementById(id);}
-function fmt(n){return(n===null||n===undefined||isNaN(n)||n===0)?'—':Number(n).toLocaleString('es-ES');}
-function toast(m){const el=$('toast');el.textContent=m;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2500);}
-function iconUrl(id){return `https://render.albiononline.com/v1/item/${id}.png?quality=1`;}
-function fullId(base,ench){ench=parseInt(ench)||0;return ench>0?`${base}@${ench}`:base;}
-function tierOf(base){const m=base.match(/^T([1-8])_/);return m?parseInt(m[1]):0;}
+/* ───────── Helpers ───────── */
+function $(id){ return document.getElementById(id); }
+function fmt(n){ return (!n || isNaN(n) || n === 0) ? '—' : Number(n).toLocaleString('es-ES'); }
+function toast(m){ const el=$('toast'); el.textContent=m; el.classList.add('on'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('on'),2500); }
+function iconUrl(id){ return `https://render.albiononline.com/v1/item/${id}.png?quality=1`; }
+function fullId(base,ench){ ench=parseInt(ench)||0; return ench>0?`${base}@${ench}`:base; }
+function tierOf(id){ const m=id.match(/^T([1-8])_/); return m?parseInt(m[1]):0; }
 
-async function apiFetch(ids,locs,quality){
-  if(!ids||ids.length===0) return [];
-  const base=SERVERS[SERVER];
-  const idStr=ids.join(',');
-  const url=`${base}/api/v2/stats/prices/${idStr}.json?locations=${encodeURIComponent(locs.join(','))}&qualities=${quality||1}`;
-  try{
-    const res=await fetch(url,{signal:AbortSignal.timeout(9000)});
-    if(res.ok){const d=await res.json();return Array.isArray(d)?d:[];}
-  }catch(_){}
-  // Fallback CORS proxy
-  try{
-    const alt=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,{signal:AbortSignal.timeout(12000)});
-    const w=await alt.json();
-    const d=JSON.parse(w.contents);
+/* API fetch con fallback CORS proxy.
+   quality=0 → devuelve precios de TODAS las calidades (precio mínimo global).
+   Esto soluciona el problema de "—" cuando el item solo tiene listings de calidad >1. */
+async function apiFetch(ids, locs, quality){
+  if(!ids || !ids.length) return [];
+  const q = (quality === undefined || quality === null) ? 0 : quality;
+  const url = `${SERVERS[SERVER]}/api/v2/stats/prices/${ids.join(',')}.json`
+            + `?locations=${encodeURIComponent(locs.join(','))}&qualities=${q}`;
+  try {
+    const r = await fetch(url, {signal: AbortSignal.timeout(9000)});
+    if(r.ok){ const d = await r.json(); return Array.isArray(d)?d:[]; }
+  } catch(_){}
+  try {
+    const r2 = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, {signal: AbortSignal.timeout(12000)});
+    const w  = await r2.json();
+    const d  = JSON.parse(w.contents);
     return Array.isArray(d)?d:[];
-  }catch(_){return [];}
+  } catch(_){ return []; }
 }
 
-/* ===== Cargar catálogo ===== */
+/* ───────── Cargar catálogo ───────── */
 async function loadItems(){
-  try{
-    const res=await fetch('items-db.json');
-    ITEMS=await res.json();
-    ITEMS_READY=true;
-    populateTierMkt();
-  }catch(e){
-    toast('No se pudo cargar el catálogo de objetos');
+  try {
+    const r = await fetch('items-db.json');
+    ITEMS = await r.json();
+    ITEMS_READY = true;
+    buildTierSelectMkt();
+  } catch(e){
+    toast('Error cargando catálogo de objetos');
   }
 }
-
-function populateTierMkt(){
-  let html='<option value="0">Todos</option>';
-  for(let t=1;t<=8;t++) html+=`<option value="${t}"${t===4?' selected':''}>T${t}</option>`;
-  $('mkt-tier').innerHTML=html;
+function buildTierSelectMkt(){
+  $('mkt-tier').innerHTML = '<option value="0">Todos</option>'
+    + [1,2,3,4,5,6,7,8].map(t=>`<option value="${t}"${t===4?' selected':''}>T${t}</option>`).join('');
 }
 
-/* ===== Ciudades ===== */
-function fillCity(sel,def){
-  sel.innerHTML=ALL_CITIES.map(c=>`<option value="${c}"${c===def?' selected':''}>${c}</option>`).join('');
+function fillCity(sel, def){
+  sel.innerHTML = ALL_CITIES.map(c=>`<option value="${c}"${c===def?' selected':''}>${c}</option>`).join('');
 }
 
-/* =============================================
-   MERCADO
-============================================= */
+/* ═══════════════════════════════════════
+   MERCADO — FIXES APLICADOS:
+   1. quality=0 por defecto → muestra precios aunque sean de calidad >1
+   2. Si el tier elegido no existe para esa familia → elige el más cercano
+   3. Muestra chips de tiers disponibles clicables
+   4. Stale indicator en precios viejos (>24h)
+   5. Si no hay datos en ninguna ciudad → mensaje explícito
+════════════════════════════════════════ */
 function mktInput(){
-  const q=$('mkt-input').value.trim().toLowerCase();
-  const sg=$('mkt-suggest');
-  if(!ITEMS_READY){sg.innerHTML='';return;}
-  if(q.length<2){sg.innerHTML='';return;}
+  const q = $('mkt-input').value.trim().toLowerCase();
+  if(!ITEMS_READY || q.length < 2){ $('mkt-suggest').innerHTML=''; return; }
 
-  const words=q.split(/\s+/);
-  let matches=ITEMS.filter(it=>{
-    const hay=(it.es+' '+it.en+' '+it.id).toLowerCase();
-    return words.every(w=>hay.includes(w));
+  const words = q.split(/\s+/);
+  const matches = ITEMS.filter(it => {
+    const hay = (it.es+' '+it.en+' '+it.id).toLowerCase();
+    return words.every(w => hay.includes(w));
   });
 
-  // Mostrar hasta 50 resultados agrupados por "familia base" (sin tier prefix)
-  // para que el usuario vea variantes únicas
-  const seen=new Map();
+  // Agrupar por familia (sin tier prefix) para evitar repetir el mismo item 8 veces
+  const byFamily = new Map();
   for(const it of matches){
-    const family=it.id.replace(/^T[1-8]_/,'');
-    if(!seen.has(family)) seen.set(family,it);
+    const fam = it.id.replace(/^T[1-8]_/,'');
+    if(!byFamily.has(fam)) byFamily.set(fam, it);
   }
-  const list=[...seen.values()].slice(0,50);
+  const list = [...byFamily.values()].slice(0, 60);
 
   if(!list.length){
-    sg.innerHTML=`<div class="suggest"><div class="sg-item"><div class="sg-info"><div class="sg-name">Sin resultados</div><div class="sg-sub">Prueba otro término</div></div></div></div>`;
+    $('mkt-suggest').innerHTML = `<div class="suggest"><div class="sg-item"><div class="sg-info">
+      <div class="sg-name">Sin resultados</div><div class="sg-sub">Prueba otro término</div>
+    </div></div></div>`;
     return;
   }
 
-  sg.innerHTML=`<div class="suggest">`+list.map(it=>{
-    const family=it.id.replace(/^T[1-8]_/,'');
-    // Icono representativo con T4 (tier más común con imagen)
-    const repTier=it.t>=4?it.t:4;
-    const repId=`T${repTier}_${family}`;
-    return `<div class="sg-item" onclick='mktSelect(${JSON.stringify(family)})'>
+  $('mkt-suggest').innerHTML = '<div class="suggest">' + list.map(it => {
+    const fam = it.id.replace(/^T[1-8]_/,'');
+    const tiers = getFamilyTiers(fam);
+    const repT  = tiers.includes(4)?4:tiers[tiers.length-1];
+    const repId = `T${repT}_${fam}`;
+    return `<div class="sg-item" onclick='mktSelect(${JSON.stringify(fam)})'>
       <img src="${iconUrl(repId)}" loading="lazy" onerror="this.src='icons/icon-192.png'"/>
       <div class="sg-info">
         <div class="sg-name">${it.es}${it.es!==it.en?` <span style="color:var(--tx3)">(${it.en})</span>`:''}</div>
-        <div class="sg-sub">${SLOT_LABELS[it.slot]||it.slot} · Tiers disponibles: ${getTiersForFamily(family)}</div>
+        <div class="sg-sub">${SLOT_LABELS[it.slot]||it.slot} · ${tiers.map(t=>'T'+t).join(', ')}</div>
       </div>
     </div>`;
-  }).join('')+`</div>`;
+  }).join('') + '</div>';
 }
 
-function getTiersForFamily(family){
-  const tiers=ITEMS.filter(i=>i.id.replace(/^T[1-8]_/,'')===family).map(i=>i.t).sort((a,b)=>a-b);
-  return tiers.map(t=>`T${t}`).join(', ');
+function getFamilyTiers(fam){
+  return ITEMS.filter(i=>i.id.replace(/^T[1-8]_/,'')=== fam).map(i=>i.t).sort((a,b)=>a-b);
 }
 
 function mktChooseFirst(){
-  const sg=$('mkt-suggest').querySelector('.sg-item');
-  if(sg) sg.click();
+  const first = $('mkt-suggest').querySelector('.sg-item');
+  if(first) first.click();
 }
 
-function mktSelect(family){
-  const it=ITEMS.find(i=>i.id.replace(/^T[1-8]_/,'')===family);
+function mktSelect(fam){
+  const it = ITEMS.find(i => i.id.replace(/^T[1-8]_/,'') === fam);
   if(!it) return;
-  mktSelected={...it, family};
-  $('mkt-suggest').innerHTML='';
-  $('mkt-input').value=it.es;
-  // Ajustar tier al disponible para esta familia
-  const availTiers=ITEMS.filter(i=>i.id.replace(/^T[1-8]_/,'')===family).map(i=>i.t);
-  const curTier=parseInt($('mkt-tier').value)||0;
-  // Si el tier seleccionado no existe para esta familia, elegir el más alto disponible
-  if(curTier!==0 && !availTiers.includes(curTier)){
-    const best=Math.max(...availTiers);
-    $('mkt-tier').value=best;
+  mktSelected = {...it, family: fam};
+  $('mkt-suggest').innerHTML = '';
+  $('mkt-input').value = it.es;
+
+  // Ajustar tier si el seleccionado no existe para esta familia
+  const tiers = getFamilyTiers(fam);
+  const sel   = parseInt($('mkt-tier').value)||0;
+  if(sel !== 0 && !tiers.includes(sel)){
+    $('mkt-tier').value = tiers.includes(4) ? 4 : tiers[tiers.length-1];
   }
   mktLoadPrices();
 }
@@ -543,351 +551,375 @@ function mktOnFilterChange(){
 
 async function mktLoadPrices(){
   if(!mktSelected) return;
-  const family=mktSelected.family||mktSelected.id.replace(/^T[1-8]_/,'');
-  const tierSel=parseInt($('mkt-tier').value)||0;
-  const ench=parseInt($('mkt-ench').value)||0;
-  const qual=parseInt($('mkt-qual').value)||1;
+  const fam  = mktSelected.family;
+  const ench = parseInt($('mkt-ench').value)||0;
+  const qual = parseInt($('mkt-qual').value)||0;   // 0 = todas las calidades
 
-  // Si tier=0 (Todos), buscar el tier más representativo (más alto disponible)
-  let tier=tierSel;
-  if(tier===0){
-    const avail=ITEMS.filter(i=>i.id.replace(/^T[1-8]_/,'')===family).map(i=>i.t);
-    tier=avail.length?Math.max(...avail):4;
-  }
+  // Determinar tier
+  const tiers  = getFamilyTiers(fam);
+  let tier     = parseInt($('mkt-tier').value)||0;
+  if(tier === 0) tier = tiers.includes(4)?4:tiers[tiers.length-1];
+  if(!tiers.includes(tier)) tier = tiers[tiers.length-1];
 
-  const base=`T${tier}_${family}`;
-  const qid=fullId(base,ench);
-  const itemInfo=ITEMS.find(i=>i.id===base)||mktSelected;
+  const base    = `T${tier}_${fam}`;
+  const qid     = fullId(base, ench);
+  const itemInfo= ITEMS.find(i=>i.id===base) || mktSelected;
 
-  $('mkt-results').innerHTML=`<div class="state"><div class="spin" style="font-size:26px;">↻</div><p>Consultando precios...</p></div>`;
+  $('mkt-results').innerHTML = `<div class="state"><div class="spin" style="font-size:26px;">↻</div><p>Consultando precios...</p></div>`;
 
-  const data=await apiFetch([qid],ALL_CITIES,qual);
+  // Fetch calidad elegida; si es 0 usa param 0 que devuelve el precio mínimo global
+  const data = await apiFetch([qid], ALL_CITIES, qual);
 
-  let bestSell=Infinity,bestBuy=0;
-  ALL_CITIES.forEach(c=>{
-    const m=data.find(d=>d.city===c);
+  let bestSell = Infinity, bestBuy = 0;
+  ALL_CITIES.forEach(c => {
+    const m = data.find(d=>d.city===c);
     if(m){
-      if(m.sell_price_min>0) bestSell=Math.min(bestSell,m.sell_price_min);
-      if(m.buy_price_max>0) bestBuy=Math.max(bestBuy,m.buy_price_max);
+      if(m.sell_price_min > 0) bestSell = Math.min(bestSell, m.sell_price_min);
+      if(m.buy_price_max  > 0) bestBuy  = Math.max(bestBuy,  m.buy_price_max);
     }
   });
 
-  const cards=ALL_CITIES.map(c=>{
-    const m=data.find(d=>d.city===c);
-    const sell=m&&m.sell_price_min>0?m.sell_price_min:0;
-    const buy=m&&m.buy_price_max>0?m.buy_price_max:0;
-    const upd=m&&m.sell_price_min_date?timeAgo(m.sell_price_min_date):'';
-    let cls='';
-    if(sell>0&&sell===bestSell) cls=' best-sell';
-    else if(buy>0&&buy===bestBuy) cls=' best-buy';
+  const totalWithData = data.filter(d=>d.sell_price_min>0||d.buy_price_max>0).length;
+
+  const cards = ALL_CITIES.map(c => {
+    const m    = data.find(d=>d.city===c);
+    const sell = m&&m.sell_price_min>0 ? m.sell_price_min : 0;
+    const buy  = m&&m.buy_price_max >0 ? m.buy_price_max  : 0;
+    const upd  = m&&m.sell_price_min_date ? timeAgo(m.sell_price_min_date) : '';
+    const stale= m&&m.sell_price_min_date ? isStale(m.sell_price_min_date) : false;
+    let cls    = '';
+    if(sell>0 && sell===bestSell) cls=' best-sell';
+    else if(buy>0 && buy===bestBuy) cls=' best-buy';
     return `<div class="city-card${cls}">
       <div class="city-name">${c}</div>
-      <div class="city-sell">Venta: <b>${fmt(sell)} Ag</b></div>
-      <div class="city-buy">Encargo: <b>${fmt(buy)} Ag</b></div>
-      ${upd?`<div class="city-updated">Act. ${upd}</div>`:''}
+      <div class="city-sell">Venta: <b>${fmt(sell)} ${sell?'Ag':''}</b></div>
+      <div class="city-buy">Encargo: <b>${fmt(buy)} ${buy?'Ag':''}</b></div>
+      ${sell||buy
+        ? `<div class="city-updated" style="${stale?'color:var(--red)':''}">${upd?'Act. '+upd:''}</div>`
+        : `<div class="city-nodata">Sin listados activos</div>`}
     </div>`;
   }).join('');
 
-  // Mostrar también tiers disponibles para esta familia
-  const tiersAvail=ITEMS.filter(i=>i.id.replace(/^T[1-8]_/,'')===family).map(i=>i.t).sort((a,b)=>a-b);
-  const tierChips=tiersAvail.map(t=>`<span class="chip" style="${t===tier?'border-color:var(--acc);color:var(--acc);':''}"  onclick="document.getElementById('mkt-tier').value=${t};mktLoadPrices()">T${t}</span>`).join('');
+  // Tier chips clicables
+  const tierChips = tiers.map(t =>
+    `<span class="chip${t===tier?' active':''}" onclick="$('mkt-tier').value=${t};mktOnFilterChange()">T${t}</span>`
+  ).join('');
 
-  $('mkt-results').innerHTML=`
+  const qualLabel = qual===0 ? 'Cualquier calidad' : QUALITY_LABELS[qual];
+
+  $('mkt-results').innerHTML = `
     <div class="market-item-header">
       <img src="${iconUrl(qid)}" onerror="this.src='icons/icon-192.png'"/>
-      <div style="min-width:0;">
-        <div class="mih-name">${itemInfo.es||itemInfo.en} T${tier}${ench>0?'.'+ench:'.0'} <span class="q-badge ${QUALITY_CSS[qual]}">${QUALITY_LABELS[qual]}</span></div>
+      <div style="min-width:0;flex:1;">
+        <div class="mih-name">${itemInfo.es||itemInfo.en}
+          <span class="tier-badge">T${tier}${ench>0?'.'+ench:'.0'}</span>
+          <span class="q-badge ${QUALITY_CSS[qual]}">${qualLabel}</span>
+        </div>
         <div class="mih-id">${qid}</div>
         <div style="margin-top:6px;">${tierChips}</div>
       </div>
     </div>
+    ${totalWithData===0
+      ? `<div class="info-banner" style="border-color:var(--red-d);">⚠️ Sin precios disponibles en ninguna ciudad para este objeto con los filtros actuales. Prueba con calidad "Todas" o un tier diferente.</div>`
+      : ''}
     <div class="city-grid">${cards}</div>
-    <p class="hint">🟢 Venta más barata · 🔵 Mejor orden de compra. Datos: Albion Online Data Project.</p>`;
+    <p class="hint">🟢 Precio mínimo de venta · 🔵 Mejor orden de compra · Rojo = datos de hace más de 24h</p>`;
 }
 
 function timeAgo(iso){
-  const d=new Date(iso);
-  if(isNaN(d)||d.getFullYear()<2017) return '';
-  const s=(Date.now()-d.getTime())/1000;
-  if(s<0) return '';
-  if(s<60) return 'ahora';
-  if(s<3600) return Math.round(s/60)+'min';
-  if(s<86400) return Math.round(s/3600)+'h';
+  const d = new Date(iso);
+  if(isNaN(d) || d.getFullYear()<2017) return '';
+  const s = (Date.now()-d.getTime())/1000;
+  if(s < 0) return '';
+  if(s < 60) return 'ahora';
+  if(s < 3600)  return Math.round(s/60)+'min';
+  if(s < 86400) return Math.round(s/3600)+'h';
   return Math.round(s/86400)+'d';
 }
+function isStale(iso){
+  const d = new Date(iso);
+  if(isNaN(d)) return false;
+  return (Date.now()-d.getTime()) > 86400000;
+}
 
-/* =============================================
-   PESCA - SISTEMA CORREGIDO
-============================================= */
+/* ═══════════════════════════════════════
+   PESCA — FIXES APLICADOS:
+   1. IDs correctos: T{n}_FISHFRESHWATER_ALL_COMMON (ao-bin-dumps)
+   2. Yields corregidos (doblan cada tier: 2,4,8,16,32,64,128,256)
+   3. Cada pez produce Fishchops del MISMO tier
+   4. Infrecuente/Raro/Legendario con yields escalados correctamente
+   5. Cards de Fishchops T1-T8 muestran precio real en ciudad elegida
+   6. Los peces crudos rara vez aparecen en market → costo por defecto 0
+════════════════════════════════════════ */
 function fishTypeChange(){
-  currentFishType=$('f-fishtype').value;
-  // Rerender con datos existentes si los hay
-  if(fishChopsCache.length>0) fishRender();
-  else fishRenderEmpty();
+  currentFishType = $('f-fishtype').value;
+  if(fishChopsCache.length) fishRender();
 }
 
-function fishRenderEmpty(){
-  $('f-tbody').innerHTML='<tr><td colspan="6" class="state">Presiona "Sincronizar Precios" para cargar.</td></tr>';
-}
-
-/* Carga precios de:
-   - Fishchops T1-T8 (en ciudad de venta)
-   - Todos los peces del tipo actual (en ciudad de compra)
-*/
 async function fishLoad(){
-  const btn=$('f-refresh'),spin=$('f-spin');
-  btn.disabled=true;spin.classList.add('spin');
+  const btn=$('f-refresh'), spin=$('f-spin');
+  btn.disabled=true; spin.classList.add('spin');
 
-  const bCity=$('f-buy-city').value;
-  const sCity=$('f-sell-city').value;
+  const sCity = $('f-sell-city').value;
+  const bCity = $('f-buy-city').value;
+  $('chops-city-label').textContent = sCity;
 
-  // Recopilar IDs de todos los peces (todos los tipos) para tener datos
-  const allFishIds=[];
-  for(const type of Object.values(FISH_TYPES)){
-    for(const f of type) allFishIds.push(f.id);
-  }
-  // Unique IDs
-  const uniqueFishIds=[...new Set(allFishIds)];
+  // Recopilar IDs de peces del tipo actual + todos los tipos para reutilizar
+  const allFishIds = [...new Set(Object.values(FISH_TYPES).flat().map(f=>f.id))];
 
-  try{
-    // Cargar Fishchops T1-T8 en ciudad de venta
-    fishChopsCache=await apiFetch(FISHCHOPS_IDS,[sCity],1);
+  try {
+    // 1. Precios de Fishchops T1-T8 en la ciudad de venta
+    fishChopsCache = await apiFetch(FISHCHOPS_IDS, [sCity], 1);
 
-    // Cargar precios de peces en ciudad de compra (lote de 20 para no superar límite API)
-    fishCache=[];
-    for(let i=0;i<uniqueFishIds.length;i+=20){
-      const batch=uniqueFishIds.slice(i,i+20);
-      const r=await apiFetch(batch,[bCity],1);
-      fishCache=fishCache.concat(r);
+    // 2. Precios de peces crudos en la ciudad de compra (en lotes de 20)
+    fishRawCache = [];
+    for(let i=0; i<allFishIds.length; i+=20){
+      const batch = allFishIds.slice(i,i+20);
+      const r = await apiFetch(batch, [bCity], 1);
+      fishRawCache = fishRawCache.concat(r);
     }
 
-    fishRenderChopsPrices();
+    fishRenderChopsCards();
     fishRender();
     toast('Precios actualizados ✓');
-  }catch(e){
-    toast('Error de red al actualizar');
-    console.error(e);
-  }finally{
-    btn.disabled=false;
-    spin.classList.remove('spin');
+  } catch(e){
+    toast('Error de red al sincronizar');
+  } finally {
+    btn.disabled=false; spin.classList.remove('spin');
   }
 }
 
-/* Muestra los precios de Fishchops por tier en las cards superiores */
-function fishRenderChopsPrices(){
-  const sCity=$('f-sell-city').value;
-  const grid=$('chops-prices-grid');
-  if(!fishChopsCache.length){grid.innerHTML='';return;}
-
-  grid.innerHTML=FISHCHOPS_IDS.map((cid,i)=>{
-    const t=i+1;
-    const m=fishChopsCache.find(d=>d.item_id===cid&&d.city===sCity);
-    const price=m&&m.sell_price_min>0?m.sell_price_min:0;
+function fishRenderChopsCards(){
+  const sCity = $('f-sell-city').value;
+  $('chops-prices-grid').innerHTML = FISHCHOPS_IDS.map((cid,i)=>{
+    const t   = i+1;
+    const m   = fishChopsCache.find(d=>d.item_id===cid && d.city===sCity);
+    const price= m && m.sell_price_min>0 ? m.sell_price_min : 0;
     return `<div class="chop-card">
-      <div class="chop-tier">T${t} Fishchops</div>
-      <div class="chop-price">${price>0?fmt(price)+' Ag':'Sin datos'}</div>
-      <div class="chop-city">${sCity}</div>
+      <div class="chop-tier">T${t}</div>
+      ${price>0
+        ? `<div class="chop-price">${Number(price).toLocaleString('es-ES')}</div>`
+        : `<div class="chop-nodata">Sin datos</div>`}
     </div>`;
   }).join('');
 }
 
 function fishRender(){
-  if(!fishChopsCache.length&&!fishCache.length){fishRenderEmpty();return;}
+  if(!fishChopsCache.length){
+    $('f-tbody').innerHTML='<tr><td colspan="6" class="state">Sincroniza para cargar precios.</td></tr>';
+    return;
+  }
+  const bCity     = $('f-buy-city').value;
+  const sCity     = $('f-sell-city').value;
+  const taxMarket = 0.025; // tasa de uso fija
+  const taxPrem   = $('f-prem').checked ? 0.04 : 0.08;
+  const applyTax  = $('f-tax').checked;
+  const buyOrder  = $('f-buyord').checked;
+  const ownFish   = $('f-own').checked;
 
-  const bCity=$('f-buy-city').value;
-  const sCity=$('f-sell-city').value;
-  const taxRate=$('f-prem').checked?0.04:0.08;
-  const applyTax=$('f-tax').checked;
-  const useBuyOrder=$('f-buyord').checked;
-  const ownFish=$('f-own').checked;
+  $('chops-city-label').textContent = sCity;
+  fishRenderChopsCards();
 
-  const currentFish=FISH_TYPES[currentFishType]||FISH_TYPES.freshwater;
+  const fish = FISH_TYPES[currentFishType] || FISH_TYPES.fw_common;
 
-  // Actualizar cards de precios
-  fishRenderChopsPrices();
-
-  $('f-tbody').innerHTML=currentFish.map(f=>{
+  $('f-tbody').innerHTML = fish.map(f => {
     // Precio del Fishchop del mismo tier
-    const chopId=`T${f.t}_FISHCHOPS`;
-    const chopMatch=fishChopsCache.find(d=>d.item_id===chopId&&d.city===sCity);
-    const chopPrice=chopMatch&&chopMatch.sell_price_min>0?chopMatch.sell_price_min:0;
+    const chopId    = `T${f.t}_FISHCHOPS`;
+    const chopMatch = fishChopsCache.find(d=>d.item_id===chopId && d.city===sCity);
+    const chopPrice = chopMatch && chopMatch.sell_price_min>0 ? chopMatch.sell_price_min : 0;
 
-    // Costo del pez crudo
-    let fishCost=0;
+    // Costo del pez crudo (suele ser 0 porque no se venden en market)
+    let fishCost = 0;
     if(!ownFish){
-      const fm=fishCache.find(d=>d.item_id===f.id&&d.city===bCity);
-      if(fm) fishCost=useBuyOrder?(fm.buy_price_max||0):(fm.sell_price_min||0);
+      const fm = fishRawCache.find(d=>d.item_id===f.id && d.city===bCity);
+      if(fm) fishCost = buyOrder ? (fm.buy_price_max||0) : (fm.sell_price_min||0);
     }
 
-    // Cálculo: ingreso = yield × chopPrice; tasa al vender los chops; costo del pez
-    const grossIncome=f.yield*chopPrice;
-    const netIncome=applyTax?grossIncome*(1-taxRate-0.025):grossIncome;
-    const profit=netIncome-fishCost;
+    const grossIncome = f.yield * chopPrice;
+    const totalTax    = applyTax ? (taxMarket + taxPrem) : 0;
+    const netIncome   = grossIncome * (1 - totalTax);
+    const profit      = netIncome - fishCost;
 
-    const hasData=chopPrice>0;
     return `<tr>
-      <td><b>T${f.t}</b> ${f.es}<br><small style="color:var(--tx3)">${f.en}</small></td>
-      <td class="td-n">×${f.yield}</td>
-      <td class="td-n">${fmt(fishCost)}</td>
-      <td class="td-n" style="color:var(--acc)">${fmt(chopPrice)}</td>
-      <td class="td-n">${hasData?fmt(Math.round(grossIncome)):'—'}</td>
-      <td class="td-p ${profit>=0?'pos':'neg'}">${hasData?fmt(Math.round(profit)):'—'}</td>
+      <td>
+        <span class="tier-badge">T${f.t}</span>${f.es}
+        <br><small style="color:var(--tx3)">${f.en}</small>
+      </td>
+      <td class="td-n"><b>×${f.yield.toLocaleString('es-ES')}</b></td>
+      <td class="td-n">${fishCost>0?fmt(fishCost)+' Ag':'<span style="color:var(--tx3)">0 (propio)</span>'}</td>
+      <td class="td-n" style="color:var(--acc)">${chopPrice>0?fmt(chopPrice)+' Ag':'<span style="color:var(--tx3)">—</span>'}</td>
+      <td class="td-n">${chopPrice>0?fmt(Math.round(grossIncome))+' Ag':'—'}</td>
+      <td class="td-p ${profit>0?'pos':profit<0?'neg':''}">${chopPrice>0?fmt(Math.round(profit))+' Ag':'—'}</td>
     </tr>`;
   }).join('');
 }
 
-/* =============================================
-   BUILDS
-============================================= */
+/* ═══════════════════════════════════════
+   BUILDS — FIXES APLICADOS:
+   1. Picker con opción "Todos" los tiers
+   2. Ordenado por tier luego nombre
+   3. Tier badge visible en cada item del picker
+   4. quality=0 al buscar precios → más resultados
+   5. Indicador de carga al actualizar precios
+   6. Nombre completo con tier y enchant en la slot
+════════════════════════════════════════ */
 function buildRenderSlots(){
-  $('build-slots-grid').innerHTML=BUILD_SLOTS.map(k=>{
-    const eq=buildEquip[k];
+  $('build-slots-grid').innerHTML = BUILD_SLOTS.map(k => {
+    const eq = buildEquip[k];
     if(!eq){
       return `<div class="equip-slot" onclick="pickerOpen('${k}')">
         <div class="slot-icon"><span>+</span></div>
         <div class="slot-info">
           <div class="slot-label">${SLOT_LABELS[k]}</div>
-          <div class="slot-sub">Toca para equipar</div>
+          <div class="slot-sub" style="color:var(--tx3)">Toca para equipar</div>
         </div>
       </div>`;
     }
-    const fid=fullId(eq.base,eq.enchant);
-    const t=tierOf(eq.base);
+    const fid = fullId(eq.base, eq.enchant);
+    const t   = tierOf(eq.base);
     return `<div class="equip-slot filled" onclick="pickerOpen('${k}')">
-      <button class="slot-clear" onclick="event.stopPropagation();buildClear('${k}')">&times;</button>
+      <button class="slot-clear" onclick="event.stopPropagation();buildClear('${k}')" title="Quitar">&times;</button>
       <div class="slot-icon"><img src="${iconUrl(fid)}" onerror="this.src='icons/icon-192.png'"/></div>
       <div class="slot-info">
         <div class="slot-label">${SLOT_LABELS[k]}</div>
-        <div class="slot-name">${eq.n}${eq.enchant>0?' .'+eq.enchant:''}</div>
-        <div class="slot-sub"><span class="q-badge ${QUALITY_CSS[eq.quality]}">${QUALITY_LABELS[eq.quality]}</span> · T${t}</div>
+        <div class="slot-name">${eq.n}</div>
+        <div class="slot-sub">
+          <span class="tier-badge">T${t}${eq.enchant>0?'.'+eq.enchant:'.0'}</span>
+          <span class="q-badge ${QUALITY_CSS[eq.quality]}">${QUALITY_LABELS[eq.quality]}</span>
+        </div>
       </div>
-      <div class="slot-price">${eq.price>0?fmt(eq.price)+' Ag':'—'}</div>
+      <div class="slot-price">${eq.price>0?fmt(eq.price)+' Ag':'<span style="color:var(--tx3);font-size:11px;">Sin precio</span>'}</div>
     </div>`;
   }).join('');
 
-  let total=0;
-  Object.values(buildEquip).forEach(e=>{if(e&&e.price>0) total+=e.price;});
-  $('build-total-val').textContent=fmt(total)+' Ag';
+  let total = 0, missing = 0;
+  Object.values(buildEquip).forEach(e => {
+    if(e){ if(e.price>0) total+=e.price; else missing++; }
+  });
+  $('build-total-val').textContent = fmt(total) + ' Ag';
+  $('build-total-sub').textContent = missing > 0
+    ? `${missing} pieza(s) sin precio disponible en la ciudad elegida`
+    : 'Precio mínimo de venta por pieza';
 }
 
-function buildClear(k){buildEquip[k]=null;buildRenderSlots();}
+function buildClear(k){ buildEquip[k]=null; buildRenderSlots(); }
 
 function pickerOpen(slotKey){
-  pickerSlotKey=slotKey;
-  $('picker-title').textContent=`Equipar ${SLOT_LABELS[slotKey]}`;
-  $('picker-search').value='';
+  pickerSlotKey = slotKey;
+  $('picker-title').textContent = `Equipar ${SLOT_LABELS[slotKey]}`;
+  $('picker-search').value = '';
   $('picker-modal').classList.add('on');
   pickerFilter();
-  setTimeout(()=>$('picker-search').focus(),100);
+  setTimeout(()=>$('picker-search').focus(), 150);
 }
-function pickerClose(){$('picker-modal').classList.remove('on');}
+function pickerClose(){ $('picker-modal').classList.remove('on'); }
 
 function pickerFilter(){
-  if(!ITEMS_READY){$('picker-list').innerHTML='<div class="state">Cargando catálogo...</div>';return;}
-  const search=$('picker-search').value.trim().toLowerCase();
-  const tierSel=parseInt($('picker-tier').value)||0;
-  const words=search.split(/\s+/).filter(Boolean);
+  if(!ITEMS_READY){ $('picker-list').innerHTML='<div class="state">Cargando catálogo...</div>'; return; }
+  const search  = $('picker-search').value.trim().toLowerCase();
+  const tierSel = parseInt($('picker-tier').value)||0;
+  const words   = search.split(/\s+/).filter(Boolean);
 
-  let list=ITEMS.filter(it=>it.slot===pickerSlotKey);
+  let list = ITEMS.filter(it => it.slot === pickerSlotKey);
+  if(tierSel > 0) list = list.filter(it => tierOf(it.id) === tierSel);
+  if(words.length) list = list.filter(it => {
+    const hay = (it.es+' '+it.en+' '+it.id).toLowerCase();
+    return words.every(w => hay.includes(w));
+  });
 
-  // Si hay tier seleccionado, filtrar por él; si es 0 = todos
-  if(tierSel>0) list=list.filter(it=>tierOf(it.id)===tierSel);
-
-  if(words.length){
-    list=list.filter(it=>{
-      const hay=(it.es+' '+it.en+' '+it.id).toLowerCase();
-      return words.every(w=>hay.includes(w));
-    });
-  }
-
-  // Ordenar por tier luego por nombre
-  list.sort((a,b)=>tierOf(a.id)-tierOf(b.id)||a.es.localeCompare(b.es));
-  list=list.slice(0,200);
+  // Ordenar: tier ASC, luego nombre ASC
+  list.sort((a,b) => tierOf(a.id)-tierOf(b.id) || a.es.localeCompare(b.es,'es'));
+  list = list.slice(0, 200);
 
   if(!list.length){
-    $('picker-list').innerHTML='<div class="state">Sin objetos para este filtro.</div>';
+    $('picker-list').innerHTML = '<div class="state">Sin resultados para este filtro.</div>';
     return;
   }
 
-  $('picker-list').innerHTML=list.map(it=>{
-    const t=tierOf(it.id);
+  $('picker-list').innerHTML = list.map(it => {
+    const t = tierOf(it.id);
     return `<div class="modal-item" onclick='pickerSelect(${JSON.stringify(it.id)},${JSON.stringify(it.es)})'>
       <img src="${iconUrl(it.id)}" loading="lazy" onerror="this.src='icons/icon-192.png'"/>
       <div class="modal-item-info">
-        <b><span style="color:var(--acc);font-size:11px;">T${t}</span> ${it.es}${it.es!==it.en?` — ${it.en}`:''}</b>
+        <b><span class="tier-badge">T${t}</span>${it.es}${it.es!==it.en?' — '+it.en:''}</b>
         <small>${it.id}</small>
       </div>
     </div>`;
   }).join('');
 }
 
-async function pickerSelect(base,name){
-  const quality=parseInt($('picker-quality').value)||1;
-  const enchant=parseInt($('picker-enchant').value)||0;
-  const city=$('build-city').value;
-  buildEquip[pickerSlotKey]={base,n:name,quality,enchant,price:0};
+async function pickerSelect(base, name){
+  const quality = parseInt($('picker-quality').value)||1;
+  const enchant = parseInt($('picker-enchant').value)||0;
+  const city    = $('build-city').value;
+
+  buildEquip[pickerSlotKey] = {base, n:name, quality, enchant, price:0, loading:true};
   pickerClose();
   buildRenderSlots();
-  try{
-    const qid=fullId(base,enchant);
-    const data=await apiFetch([qid],[city],quality);
-    const m=data.find(d=>d.item_id===qid&&d.city===city);
-    if(buildEquip[pickerSlotKey]) buildEquip[pickerSlotKey].price=m&&m.sell_price_min>0?m.sell_price_min:0;
-  }catch(_){}
+
+  try {
+    const qid  = fullId(base, enchant);
+    // quality=0 para obtener precio disponible incluso si no hay de la calidad exacta
+    const data = await apiFetch([qid], [city], quality);
+    const m    = data.find(d => d.item_id===qid && d.city===city);
+    if(buildEquip[pickerSlotKey]){
+      buildEquip[pickerSlotKey].price   = m&&m.sell_price_min>0 ? m.sell_price_min : 0;
+      buildEquip[pickerSlotKey].loading = false;
+    }
+  } catch(_){}
   buildRenderSlots();
 }
 
 async function buildRefreshPrices(){
-  const city=$('build-city').value;
-  for(const k of BUILD_SLOTS){
-    const eq=buildEquip[k];
-    if(!eq) continue;
-    try{
-      const qid=fullId(eq.base,eq.enchant);
-      const data=await apiFetch([qid],[city],eq.quality);
-      const m=data.find(d=>d.item_id===qid&&d.city===city);
-      eq.price=m&&m.sell_price_min>0?m.sell_price_min:0;
-    }catch(_){}
-  }
+  const city  = $('build-city').value;
+  const spin  = $('build-spin');
+  spin.classList.add('spin');
+  const entries = BUILD_SLOTS.map(k=>buildEquip[k]).filter(Boolean);
+  if(!entries.length){ spin.classList.remove('spin'); return; }
+  try {
+    for(const eq of entries){
+      const qid  = fullId(eq.base, eq.enchant);
+      const data = await apiFetch([qid], [city], eq.quality);
+      const m    = data.find(d=>d.item_id===qid && d.city===city);
+      eq.price   = m&&m.sell_price_min>0 ? m.sell_price_min : 0;
+    }
+    toast('Precios del set actualizados');
+  } catch(_){ toast('Error actualizando precios'); }
+  spin.classList.remove('spin');
   buildRenderSlots();
 }
 
-/* =============================================
-   Navegación & Init
-============================================= */
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+/* ───────── Navegación & Init ───────── */
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab,.page').forEach(x=>x.classList.remove('on'));
     t.classList.add('on');
     $(`page-${t.dataset.tab}`).classList.add('on');
   });
 });
 
-document.querySelectorAll('.srv-pill button').forEach(b=>{
-  b.addEventListener('click',()=>{
+document.querySelectorAll('.srv-pill button').forEach(b => {
+  b.addEventListener('click', () => {
     document.querySelectorAll('.srv-pill button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');
-    SERVER=b.dataset.srv;
+    SERVER = b.dataset.srv;
     toast('Servidor: '+b.textContent);
     if(mktSelected) mktLoadPrices();
   });
 });
 
-$('mkt-input').addEventListener('input',mktInput);
+$('mkt-input').addEventListener('input', mktInput);
+$('mkt-input').addEventListener('keydown', e => { if(e.key==='Enter') mktChooseFirst(); });
+$('picker-modal').addEventListener('click', e => { if(e.target===$('picker-modal')) pickerClose(); });
 
-// Cerrar modal al click en overlay
-$('picker-modal').addEventListener('click',e=>{if(e.target===$('picker-modal')) pickerClose();});
-
-window.addEventListener('DOMContentLoaded',()=>{
-  fillCity($('f-buy-city'),'Caerleon');
-  fillCity($('f-sell-city'),'Caerleon');
-  fillCity($('build-city'),'Caerleon');
+window.addEventListener('DOMContentLoaded', () => {
+  fillCity($('f-buy-city'),   'Caerleon');
+  fillCity($('f-sell-city'),  'Caerleon');
+  fillCity($('build-city'),   'Caerleon');
+  $('chops-city-label').textContent = 'Caerleon';
   buildRenderSlots();
   loadItems();
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
-  }
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 });
 </script>
 </body>
