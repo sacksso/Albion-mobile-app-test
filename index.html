@@ -650,9 +650,7 @@ const SLOT_ITEMS={
   ],
 };
 
-let buildEquip={};// key->{ id, name, price }
-let pickerSlotKey=null;
-let pickerTier='all';
+// build vars declared in BUILD CREATOR section below
 
 // ─── UTILS ────────────────────────────────────────────────────────────────────
 const $=id=>document.getElementById(id);
@@ -799,8 +797,8 @@ function fishCalc(fishData,chopsData,fish,ror){
 function fishRender(){
   const sellCity=$('f-sell-city').value;
   const ror=parseInt($('f-ror').value);
-  const own=$('f-own').checked,bo=$('f-buyord').checked;
-  $('f-ph').textContent=own?'Costo pez':bo?'Buy Order':'Venta directa';
+  const bo=$('f-buyord').checked;
+  $('f-ph').textContent=bo?'Buy Order':'Venta directa';
 
   const chopsData=fishCache[`${CHOPS_ID}|${sellCity}`]||null;
   let chopsUnit=chopsData?.sell_price_min>0?chopsData.sell_price_min:null;
@@ -846,8 +844,8 @@ function fishRender(){
       const realYield=Math.floor(fish.yield*ror/100);
       const chipCls=fish.sec==='boss'?'boss':fish.sec==='rare'?'rare':'';
       const pc=res==null?'':(res.profit>=0?'pos':'neg');
-      const fp=own?'<span style="color:var(--grn);font-size:12px">Propio</span>':(res?.fishPrice?fmt(res.fishPrice):'<span style="color:var(--tx3)">—</span>');
-      const d=res?btoa(JSON.stringify({name:fish.name,t:fish.t,sec:fish.sec,baseYield:fish.yield,realYield,ror,fishCost:res.fishCost,chopsUnit:res.chopsUnit,gross:res.gross,net:res.net,profit:res.profit,own,tax:$('f-tax').checked,prem:$('f-prem').checked})):'null';
+      const fp=res?.fishPrice?fmt(res.fishPrice):'<span style="color:var(--tx3)">—</span>';
+      const d=res?btoa(JSON.stringify({name:fish.name,t:fish.t,sec:fish.sec,baseYield:fish.yield,realYield,ror,fishCost:res.fishCost,chopsUnit:res.chopsUnit,gross:res.gross,net:res.net,profit:res.profit,tax:$('f-tax').checked,prem:$('f-prem').checked})):'null';
       html+=`<tr class="dr${fishSelRow===d?' sel':''}" onclick="fishSelect(this,'${d}')">
         <td><div class="td-nm"><img src="${icon(fish.id)}" loading="lazy"/><div><b>T${fish.t} ${fish.name}</b><small>${fish.lbl}</small></div></div></td>
         <td><span class="chip ${chipCls}">×${realYield}</span></td>
@@ -870,7 +868,7 @@ function fishSelect(tr,d64){
   $('f-dtitle').textContent=`T${r.t} ${r.name} — Desglose`;
   $('f-dgrid').innerHTML=`
     <div class="di"><div class="dl">Yield real</div><div class="dv">×${r.realYield}</div></div>
-    <div class="di"><div class="dl">Costo pez</div><div class="dv">${r.own?'Propio (0)':fmt(r.fishCost)}</div></div>
+    <div class="di"><div class="dl">Costo pez</div><div class="dv">${fmt(r.fishCost)}</div></div>
     <div class="di"><div class="dl">Chopped/ud</div><div class="dv">${fmt(r.chopsUnit)}</div></div>
     <div class="di"><div class="dl">Ingreso bruto</div><div class="dv">${fmt(r.gross)}</div></div>
     <div class="di"><div class="dl">Ingreso neto</div><div class="dv">${fmt(r.net)}</div></div>
@@ -879,8 +877,8 @@ function fishSelect(tr,d64){
     Yield: floor(${r.baseYield}×${r.ror}%RoR) = <span class="f-acc">×${r.realYield}</span><br>
     Bruto: ${r.realYield}×${fmt(r.chopsUnit)} = <b>${fmt(r.gross)}</b><br>
     Neto: ${fmt(r.gross)}×(1−${r.prem?'4':'8'}%−2.5%) = <span class="f-grn">${fmt(r.net)}</span><br>
-    Costo: <b>${r.own?'0 (propio)':fmt(r.fishCost)}</b><br>
-    <b>Ganancia = ${fmt(r.net)} − ${r.own?'0':fmt(r.fishCost)} = <span class="${r.profit>=0?'f-grn':'f-red'}">${fmt(r.profit)}</span></b>`;
+    Costo: <b>${fmt(r.fishCost)}</b><br>
+    <b>Ganancia = ${fmt(r.net)} − ${fmt(r.fishCost)} = <span class="${r.profit>=0?'f-grn':'f-red'}">${fmt(r.profit)}</span></b>`;
   $('f-drawer').classList.add('on');
   $('f-drawer').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
