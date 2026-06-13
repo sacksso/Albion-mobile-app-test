@@ -1,49 +1,61 @@
-// Service Worker — AlbionTools v6
-const CACHE = 'albion-v6';
+// Cambia este número cada vez que actualices la app
+const CACHE = 'albion-v4';
 
-const PRECACHE = [
-  './',
-  './index.html',
-  './manifest.json',
-  './items-db.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
-];
+const PRECACHE = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE)));
+  // Toma control inmediatamente sin esperar a que se cierren las pestañas
   self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.map(k => (k !== CACHE ? caches.delete(k) : null)))
-    ).then(() => self.clients.claim())
+      Promise.all(keys.map(k => {
+        // Elimina TODAS las cachés anteriores
+        if (k !== CACHE) {
+          console.log('[SW] Eliminando caché vieja:', k);
+          return caches.delete(k);
+        }
+      }))
+    ).then(() => self.clients.claim()) // Toma control de todas las pestañas abiertas
   );
 });
 
 self.addEventListener('fetch', e => {
   const url = e.request.url;
 
-  // Never cache live API / image-render calls; just pass through with a graceful fallback.
-  if (url.includes('albion-online-data.com') || url.includes('allorigins') || url.includes('render.albiononline.com')) {
-    e.respondWith(fetch(e.request).catch(() => new Response('[]', { headers: { 'Content-Type': 'application/json' } })));
+  // API externa — siempre red, nunca cachear
+  if (url.includes('albion-online-data.com') || url.includes('corsproxy') ||
+      url.includes('allorigins') || url.includes('thingproxy') ||
+      url.includes('render.albiononline.com')) {
+    e.respondWith(fetch(e.request).catch(() =>
+      new Response('[]', { headers: { 'Content-Type': 'application/json' } })
+    ));
     return;
   }
 
-  // items-db.json: network first (to pick up updates) then cache.
-  if (url.includes('items-db.json')) {
+  // index.html — siempre intenta red primero para tener la versión más reciente
+  if (url.endsWith('/') || url.endsWith('index.html')) {
     e.respondWith(
       fetch(e.request).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy));
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
         return res;
       }).catch(() => caches.match(e.request))
     );
     return;
   }
 
-  // App shell: cache first.
-  e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+  // Otros archivos — cache first
+  e.respondWith(
+    caches.match(e.request).then(hit => hit || fetch(e.request).then(res => {
+      if (res && res.status === 200) {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
+      }
+      return res;
+    }))
+  );
 });
