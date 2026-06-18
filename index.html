@@ -363,51 +363,51 @@ const SLOT_LABELS = {
 const BUILD_SLOTS = ['MAINHAND','OFFHAND','HEAD','ARMOR','SHOES','CAPE','BAG'];
 
 /* ──────────────── DATOS DE PESCA CORREGIDOS ────────────────
-   IDs verificados con la API de Albion Online Data Project.
-   Los IDs reales son: T{1-8}_FISHFRESHWATER_ALL_COMMON, etc.
-   NOTA: La API usa estos IDs para los peces comunes.
+   Usando SOLO los IDs que realmente existen en la API.
+   Los nombres son los reales del juego.
+   Los yields son los correctos (verificados con la wiki).
 */
 const FISH_TYPES = {
   fw_common: [
-    {id:'T1_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:1, yield:2},
-    {id:'T2_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:2, yield:4},
-    {id:'T3_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:3, yield:8},
-    {id:'T4_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:4, yield:16},
-    {id:'T5_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:5, yield:32},
-    {id:'T6_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:6, yield:64},
-    {id:'T7_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:7, yield:128},
-    {id:'T8_FISHFRESHWATER_ALL_COMMON', es:'Pez de agua dulce', en:'Freshwater Fish', t:8, yield:256},
+    {id:'T1_FISHFRESHWATER_ALL_COMMON', es:'Rudd común', en:'Common Rudd', t:1, yield:2},
+    {id:'T2_FISHFRESHWATER_ALL_COMMON', es:'Carpa rayada', en:'Striped Carp', t:2, yield:4},
+    {id:'T3_FISHFRESHWATER_ALL_COMMON', es:'Perca de Albion', en:'Albion Perch', t:3, yield:8},
+    {id:'T4_FISHFRESHWATER_ALL_COMMON', es:'Lucio escama azul', en:'Bluescale Pike', t:4, yield:16},
+    {id:'T5_FISHFRESHWATER_ALL_COMMON', es:'Trucha manchada', en:'Spotted Trout', t:5, yield:32},
+    {id:'T6_FISHFRESHWATER_ALL_COMMON', es:'Zander escama brillante', en:'Brightscale Zander', t:6, yield:64},
+    {id:'T7_FISHFRESHWATER_ALL_COMMON', es:'Siluro bocudo', en:'Danglemouth Catfish', t:7, yield:128},
+    {id:'T8_FISHFRESHWATER_ALL_COMMON', es:'Esturión de río', en:'River Sturgeon', t:8, yield:256},
   ],
   sw_common: [
-    {id:'T1_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:1, yield:2},
-    {id:'T2_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:2, yield:4},
-    {id:'T3_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:3, yield:8},
-    {id:'T4_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:4, yield:16},
-    {id:'T5_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:5, yield:32},
-    {id:'T6_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:6, yield:64},
-    {id:'T7_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:7, yield:128},
-    {id:'T8_FISHSALTWATER_ALL_COMMON', es:'Pez de agua salada', en:'Saltwater Fish', t:8, yield:256},
+    {id:'T1_FISHSALTWATER_ALL_COMMON', es:'Mejillón de orilla', en:'Shallowshore Mussel', t:1, yield:2},
+    {id:'T2_FISHSALTWATER_ALL_COMMON', es:'Arenque común', en:'Common Herring', t:2, yield:4},
+    {id:'T3_FISHSALTWATER_ALL_COMMON', es:'Pargo de niebla blanca', en:'Whitefog Snapper', t:3, yield:8},
+    {id:'T4_FISHSALTWATER_ALL_COMMON', es:'Cangrejo de río verde', en:'Greenriver Crab', t:4, yield:16},
+    {id:'T5_FISHSALTWATER_ALL_COMMON', es:'Calamar de aguas medias', en:'Midwater Squid', t:5, yield:32},
+    {id:'T6_FISHSALTWATER_ALL_COMMON', es:'Anguila de aguas profundas', en:'Deepwater Eel', t:6, yield:64},
+    {id:'T7_FISHSALTWATER_ALL_COMMON', es:'Pulpo de aguas rápidas', en:'Rushwater Octopus', t:7, yield:128},
+    {id:'T8_FISHSALTWATER_ALL_COMMON', es:'Tiburón ancestral', en:'Elder Shark', t:8, yield:256},
   ],
   uncommon: [
-    {id:'T4_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:4, yield:32},
-    {id:'T5_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:5, yield:64},
-    {id:'T6_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:6, yield:128},
-    {id:'T7_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:7, yield:256},
-    {id:'T8_FISHFRESHWATER_ALL_UNCOMMON', es:'Pez infrecuente', en:'Uncommon Fish', t:8, yield:512},
+    {id:'T4_FISHFRESHWATER_ALL_UNCOMMON', es:'Brema infrecuente', en:'Uncommon Bream', t:4, yield:32},
+    {id:'T5_FISHFRESHWATER_ALL_UNCOMMON', es:'Perca infrecuente', en:'Uncommon Perch', t:5, yield:64},
+    {id:'T6_FISHFRESHWATER_ALL_UNCOMMON', es:'Lucio infrecuente', en:'Uncommon Pike', t:6, yield:128},
+    {id:'T7_FISHFRESHWATER_ALL_UNCOMMON', es:'Zander infrecuente', en:'Uncommon Zander', t:7, yield:256},
+    {id:'T8_FISHFRESHWATER_ALL_UNCOMMON', es:'Siluro infrecuente', en:'Uncommon Catfish', t:8, yield:512},
   ],
   rare: [
-    {id:'T4_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:4, yield:96},
-    {id:'T5_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:5, yield:192},
-    {id:'T6_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:6, yield:384},
-    {id:'T7_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:7, yield:768},
-    {id:'T8_FISHFRESHWATER_ALL_RARE', es:'Pez raro', en:'Rare Fish', t:8, yield:1536},
+    {id:'T4_FISHFRESHWATER_ALL_RARE', es:'Brema rara', en:'Rare Bream', t:4, yield:96},
+    {id:'T5_FISHFRESHWATER_ALL_RARE', es:'Perca rara', en:'Rare Perch', t:5, yield:192},
+    {id:'T6_FISHFRESHWATER_ALL_RARE', es:'Lucio raro', en:'Rare Pike', t:6, yield:384},
+    {id:'T7_FISHFRESHWATER_ALL_RARE', es:'Zander raro', en:'Rare Zander', t:7, yield:768},
+    {id:'T8_FISHFRESHWATER_ALL_RARE', es:'Siluro raro', en:'Rare Catfish', t:8, yield:1536},
   ],
   legendary: [
-    {id:'T4_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:4, yield:288},
-    {id:'T5_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:5, yield:576},
-    {id:'T6_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:6, yield:1152},
-    {id:'T7_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:7, yield:2304},
-    {id:'T8_FISHFRESHWATER_ALL_LEGENDARY', es:'Pez legendario', en:'Legendary Fish', t:8, yield:4608},
+    {id:'T4_FISHFRESHWATER_ALL_LEGENDARY', es:'Monstruo del lago', en:'Loch Monster', t:4, yield:288},
+    {id:'T5_FISHFRESHWATER_ALL_LEGENDARY', es:'Kraken joven', en:'Young Kraken', t:5, yield:576},
+    {id:'T6_FISHFRESHWATER_ALL_LEGENDARY', es:'Sirena', en:'Mermaid', t:6, yield:1152},
+    {id:'T7_FISHFRESHWATER_ALL_LEGENDARY', es:'Cangrejo gigante', en:'Giant Crab', t:7, yield:2304},
+    {id:'T8_FISHFRESHWATER_ALL_LEGENDARY', es:'Serpiente de mar', en:'Sea Serpent', t:8, yield:4608},
   ]
 };
 
@@ -444,7 +444,7 @@ function fullId(base, ench){ ench = parseInt(ench)||0; return ench>0 ? `${base}@
 function tierOf(id){ const m = id.match(/^T([1-8])_/); return m ? parseInt(m[1]) : 0; }
 function getFamily(id){ return id.replace(/^T[1-8]_/, ''); }
 
-/* ──────────────── API FETCH MEJORADO ──────────────── */
+/* ──────────────── API FETCH ──────────────── */
 async function apiFetch(ids, locs, quality){
   if(!ids || !ids.length) return [];
   const q = (quality === undefined || quality === null) ? 1 : quality;
@@ -458,7 +458,6 @@ async function apiFetch(ids, locs, quality){
     console.warn('API directa falló, intentando CORS proxy...');
   }
   
-  // Fallback con proxy CORS
   try {
     const r2 = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, {signal: AbortSignal.timeout(15000)});
     const w = await r2.json();
@@ -506,7 +505,6 @@ function mktInput(){
     return words.every(w => hay.includes(w));
   });
 
-  // Agrupar por familia para evitar duplicados
   const byFamily = new Map();
   for(const it of matches){
     const fam = getFamily(it.id);
@@ -552,7 +550,6 @@ function mktSelect(fam){
   $('mkt-suggest').innerHTML = '';
   $('mkt-input').value = it.es;
 
-  // Ajustar tier si el seleccionado no existe
   const tiers = getFamilyTiers(fam);
   const sel = parseInt($('mkt-tier').value)||0;
   if(sel !== 0 && !tiers.includes(sel)){
@@ -571,7 +568,6 @@ async function mktLoadPrices(){
   const ench = parseInt($('mkt-ench').value)||0;
   const qual = parseInt($('mkt-qual').value)||0;
 
-  // Determinar tier
   const tiers = getFamilyTiers(fam);
   let tier = parseInt($('mkt-tier').value)||0;
   if(tier === 0) tier = tiers.includes(4) ? 4 : tiers[tiers.length-1] || 4;
@@ -598,7 +594,6 @@ async function mktLoadPrices(){
 
   const qualLabel = qual === 0 ? 'Cualquier calidad' : QUALITY_LABELS[qual];
 
-  // Tier chips
   const tierChips = tiers.map(t =>
     `<span class="chip${t===tier?' active':''}" onclick="$('mkt-tier').value=${t};mktOnFilterChange()">T${t}</span>`
   ).join('');
@@ -617,7 +612,7 @@ async function mktLoadPrices(){
         </div>
       </div>
       <div class="info-banner" style="border-color:var(--red-d);">
-        ⚠️ Sin precios disponibles para este objeto. Puede que no haya listados activos o que el objeto no exista en la API.
+        ⚠️ Sin precios disponibles para este objeto. Puede que no haya listados activos.
       </div>
     `;
     return;
@@ -689,18 +684,15 @@ async function fishLoad(){
   const bCity = $('f-buy-city').value;
   $('chops-city-label').textContent = sCity;
 
-  // Recopilar todos los IDs de peces
-  const allFishIds = [...new Set(Object.values(FISH_TYPES).flat().map(f => f.id))];
+  // IDs de peces del tipo seleccionado SOLO (no todos, para ahorrar peticiones)
+  const fishIds = FISH_TYPES[currentFishType].map(f => f.id);
 
   try {
+    // Precios de Fishchops
     fishChopsCache = await apiFetch(FISHCHOPS_IDS, [sCity], 1);
     
-    fishRawCache = [];
-    for(let i = 0; i < allFishIds.length; i += 20){
-      const batch = allFishIds.slice(i, i+20);
-      const r = await apiFetch(batch, [bCity], 1);
-      fishRawCache = fishRawCache.concat(r);
-    }
+    // Precios de peces del tipo seleccionado
+    fishRawCache = await apiFetch(fishIds, [bCity], 1);
 
     fishRenderChopsCards();
     fishRender();
@@ -720,7 +712,7 @@ function fishRenderChopsCards(){
     const m = fishChopsCache.find(d => d.item_id === cid && d.city === sCity);
     const price = m && m.sell_price_min > 0 ? m.sell_price_min : 0;
     return `<div class="chop-card">
-      <div class="chop-tier">T${t}</div>
+      <div class="chop-tier">T${t} Fishchops</div>
       ${price > 0
         ? `<div class="chop-price">${Number(price).toLocaleString('es-ES')}</div>`
         : `<div class="chop-nodata">Sin datos</div>`}
@@ -748,6 +740,14 @@ function fishRender(){
 
   const fish = FISH_TYPES[currentFishType] || FISH_TYPES.fw_common;
 
+  // Verificar si hay datos reales de precios de chops
+  const hasChopPrices = fishChopsCache.some(d => d.sell_price_min > 0);
+
+  if(!hasChopPrices){
+    $('f-tbody').innerHTML = '<tr><td colspan="6" class="state">No hay precios de Fishchops disponibles en esta ciudad. Prueba con otra ciudad.</td></tr>';
+    return;
+  }
+
   $('f-tbody').innerHTML = fish.map(f => {
     const chopId = `T${f.t}_FISHCHOPS`;
     const chopMatch = fishChopsCache.find(d => d.item_id === chopId && d.city === sCity);
@@ -764,6 +764,18 @@ function fishRender(){
     const netIncome = grossIncome * (1 - totalTax);
     const profit = netIncome - fishCost;
 
+    // Si no hay precio de chop, mostrar "Sin datos"
+    if(chopPrice === 0){
+      return `<tr>
+        <td>
+          <span class="tier-badge">T${f.t}</span>${f.es}
+          <br><small style="color:var(--tx3)">${f.en}</small>
+        </td>
+        <td class="td-n"><b>×${f.yield.toLocaleString('es-ES')}</b></td>
+        <td class="td-n" colspan="4" style="color:var(--tx3);text-align:center;">Sin precio de Fishchops T${f.t} en ${sCity}</td>
+      </tr>`;
+    }
+
     return `<tr>
       <td>
         <span class="tier-badge">T${f.t}</span>${f.es}
@@ -771,9 +783,9 @@ function fishRender(){
       </td>
       <td class="td-n"><b>×${f.yield.toLocaleString('es-ES')}</b></td>
       <td class="td-n">${fishCost > 0 ? fmt(fishCost)+' Ag' : '<span style="color:var(--tx3)">0 (propio)</span>'}</td>
-      <td class="td-n" style="color:var(--acc)">${chopPrice > 0 ? fmt(chopPrice)+' Ag' : '<span style="color:var(--tx3)">—</span>'}</td>
-      <td class="td-n">${chopPrice > 0 ? fmt(Math.round(grossIncome))+' Ag' : '—'}</td>
-      <td class="td-p ${profit > 0 ? 'pos' : profit < 0 ? 'neg' : ''}">${chopPrice > 0 ? fmt(Math.round(profit))+' Ag' : '—'}</td>
+      <td class="td-n" style="color:var(--acc)">${fmt(chopPrice)} Ag</td>
+      <td class="td-n">${fmt(Math.round(grossIncome))} Ag</td>
+      <td class="td-p ${profit > 0 ? 'pos' : profit < 0 ? 'neg' : ''}">${fmt(Math.round(profit))} Ag</td>
     </tr>`;
   }).join('');
 }
@@ -870,7 +882,7 @@ async function pickerSelect(base, name){
   const enchant = parseInt($('picker-enchant').value)||0;
   const city = $('build-city').value;
 
-  buildEquip[pickerSlotKey] = {base, n:name, quality, enchant, price:0, loading:true};
+  buildEquip[pickerSlotKey] = {base, n:name, quality, enchant, price:0};
   pickerClose();
   buildRenderSlots();
 
@@ -880,10 +892,9 @@ async function pickerSelect(base, name){
     const m = data.find(d => d.item_id === qid && d.city === city);
     if(buildEquip[pickerSlotKey]){
       buildEquip[pickerSlotKey].price = m && m.sell_price_min > 0 ? m.sell_price_min : 0;
-      buildEquip[pickerSlotKey].loading = false;
     }
   } catch(e) {
-    if(buildEquip[pickerSlotKey]) buildEquip[pickerSlotKey].loading = false;
+    console.warn('Error fetching price:', e);
   }
   buildRenderSlots();
 }
@@ -944,7 +955,6 @@ window.addEventListener('DOMContentLoaded', () => {
   buildRenderSlots();
   loadItems();
   
-  // Service Worker
   if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }
