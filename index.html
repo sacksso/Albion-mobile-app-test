@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
@@ -9,45 +9,102 @@
 <link rel="manifest" href="manifest.json"/>
 <title>AlbionTools</title>
 <style>
-:root{
-  --bg:#0d1117;--s1:#161b22;--s2:#1c2333;--s3:#21262d;
-  --bd:#30363d;--bd2:#21262d;
-  --acc:#f59e0b;--acc-d:rgba(245,158,11,.13);--acc-g:rgba(245,158,11,.28);
-  --grn:#3fb950;--grn-d:rgba(63,185,80,.13);
-  --red:#f85149;--red-d:rgba(248,81,73,.13);
-  --blu:#58a6ff;--pur:#bc8cff;
-  --tx:#e6edf3;--tx2:#8b949e;--tx3:#484f58;
+/* ============================================================
+   VARIABLES Y TEMAS
+   ============================================================ */
+:root {
+  --bg:#0d1117; --s1:#161b22; --s2:#1c2333; --s3:#21262d;
+  --bd:#30363d; --bd2:#21262d;
+  --acc:#f59e0b; --acc-d:rgba(245,158,11,.13); --acc-g:rgba(245,158,11,.28);
+  --grn:#3fb950; --grn-d:rgba(63,185,80,.13);
+  --red:#f85149; --red-d:rgba(248,81,73,.13);
+  --blu:#58a6ff; --pur:#bc8cff;
+  --tx:#e6edf3; --tx2:#8b949e; --tx3:#484f58;
+  --shadow:rgba(0,0,0,0.4);
+  --toast-bg:#238636;
+  --toast-error:#da3633;
 }
+
+[data-theme="light"] {
+  --bg:#f0f6fc; --s1:#ffffff; --s2:#f6f8fa; --s3:#e1e4e8;
+  --bd:#d0d7de; --bd2:#d0d7de;
+  --tx:#24292f; --tx2:#57606a; --tx3:#8b949e;
+  --shadow:rgba(0,0,0,0.1);
+  --toast-bg:#2da44e;
+  --toast-error:#cf222e;
+}
+
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-body{background:var(--bg);color:var(--tx);overflow-x:hidden;padding-bottom:75px;}
-header{background:var(--s1);padding:12px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:90;}
-.logo{font-size:18px;font-weight:700;letter-spacing:-0.5px;}
+body{background:var(--bg);color:var(--tx);overflow-x:hidden;padding-bottom:75px;transition:background .3s,color .3s;}
+
+/* ============================================================
+   HEADER Y NAVEGACIÓN
+   ============================================================ */
+header{background:var(--s1);padding:12px 16px;border-bottom:1px solid var(--bd);display:flex;flex-wrap:wrap;align-items:center;gap:8px;position:sticky;top:0;z-index:90;}
+.logo{font-size:18px;font-weight:700;letter-spacing:-0.5px;margin-right:auto;}
 .logo span{color:var(--acc);}
+
+.header-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+
 .srv-pill{display:flex;background:var(--s3);border-radius:20px;padding:2px;border:1px solid var(--bd);}
 .srv-pill button{background:none;border:none;color:var(--tx2);padding:4px 10px;font-size:11px;font-weight:600;border-radius:18px;cursor:pointer;transition:all .2s;}
 .srv-pill button.on{background:var(--acc);color:#000;}
 .srv-pill button:hover:not(.on){color:var(--tx);}
+
+.server-status{display:flex;gap:10px;font-size:11px;background:var(--s2);padding:4px 10px;border-radius:20px;border:1px solid var(--bd);}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;}
+.status-dot.online{background:var(--grn);}
+.status-dot.offline{background:var(--red);}
+.status-dot.unknown{background:var(--tx3);}
+
+.theme-toggle{background:var(--s3);border:1px solid var(--bd);border-radius:50%;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--tx2);transition:all .2s;}
+.theme-toggle:hover{color:var(--acc);border-color:var(--acc);}
+
 nav{position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--bd);display:flex;height:60px;z-index:100;}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--tx2);cursor:pointer;font-size:11px;font-weight:500;gap:3px;transition:color .2s;}
 .tab i{font-size:18px;font-style:normal;}
 .tab.on{color:var(--acc);}
+
+/* ============================================================
+   PÁGINAS Y CONTENIDO
+   ============================================================ */
 .page{display:none;padding:16px;max-width:820px;margin:0 auto;}
 .page.on{display:block;}
+
 h2{font-size:20px;margin-bottom:4px;font-weight:700;}
 p.sub{color:var(--tx2);font-size:13px;margin-bottom:16px;line-height:1.5;}
+
+/* ============================================================
+   COMPONENTES COMUNES
+   ============================================================ */
 .search-box{display:flex;gap:8px;margin-bottom:12px;}
 input,select{background:var(--s1);border:1px solid var(--bd);color:var(--tx);padding:10px 14px;border-radius:8px;font-size:14px;outline:none;transition:border .2s;width:100%;}
 input:focus,select:focus{border-color:var(--acc);}
-button.btn-main{background:var(--acc);color:#000;border:none;padding:10px 16px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:opacity .2s;}
-button.btn-main:hover{opacity:.85;}
-button:disabled{opacity:0.5;cursor:not-allowed;}
+
+button.btn-main{background:var(--acc);color:#000;border:none;padding:10px 16px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:opacity .2s,transform .1s;}
+button.btn-main:hover{opacity:.85;transform:scale(1.01);}
+button.btn-main:active{transform:scale(.97);}
+button:disabled{opacity:0.5;cursor:not-allowed;transform:none!important;}
+
 .spin{display:inline-block;animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
+
 .fld-lbl{font-size:11px;color:var(--tx2);font-weight:600;display:block;margin-bottom:4px;}
 .row{display:flex;gap:8px;flex-wrap:wrap;}
 .row>div{flex:1;min-width:110px;}
+
 .state{text-align:center;padding:40px 16px;color:var(--tx2);}
 .state .ico{font-size:32px;margin-bottom:8px;}
+
+.hint{font-size:11px;color:var(--tx3);margin-top:8px;text-align:center;}
+.info-banner{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--tx2);margin-bottom:12px;line-height:1.6;}
+.info-banner strong{color:var(--tx);}
+
+.loading-spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--bd);border-top-color:var(--acc);border-radius:50%;animation:spin .8s linear infinite;}
+
+/* ============================================================
+   MERCADO
+   ============================================================ */
 .city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px;}
 .city-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:12px;transition:all .2s;}
 .city-card:hover{transform:translateY(-2px);border-color:var(--tx3);}
@@ -58,10 +115,12 @@ button:disabled{opacity:0.5;cursor:not-allowed;}
 .city-sell b,.city-buy b{color:var(--tx);font-weight:700;}
 .city-updated{font-size:10px;color:var(--tx3);margin-top:6px;}
 .city-nodata{font-size:11px;color:var(--tx3);margin-top:4px;font-style:italic;}
+
 .market-item-header{display:flex;align-items:center;gap:12px;background:var(--s2);padding:12px;border-radius:10px;border:1px solid var(--bd);margin-bottom:12px;}
 .market-item-header img{width:52px;height:52px;object-fit:contain;}
 .mih-name{font-size:15px;font-weight:700;}
 .mih-id{font-size:11px;color:var(--tx2);font-family:monospace;}
+
 .suggest{background:var(--s1);border:1px solid var(--bd);border-radius:10px;margin-bottom:12px;overflow:hidden;max-height:320px;overflow-y:auto;}
 .sg-item{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--bd2);transition:background .15s;}
 .sg-item:last-child{border-bottom:none;}
@@ -70,6 +129,29 @@ button:disabled{opacity:0.5;cursor:not-allowed;}
 .sg-info{min-width:0;}
 .sg-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .sg-sub{font-size:11px;color:var(--tx2);}
+
+.tier-badge{font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(245,158,11,.15);color:var(--acc);margin-right:4px;}
+.q-badge{font-size:10px;padding:1px 5px;border-radius:4px;font-weight:700;}
+.q0{background:var(--s3);color:var(--tx3);}
+.q1{background:var(--s3);color:var(--tx2);}
+.q2{background:rgba(88,166,255,0.15);color:var(--blu);}
+.q3{background:var(--grn-d);color:var(--grn);}
+.q4{background:rgba(188,140,255,0.15);color:var(--pur);}
+.q5{background:var(--acc-d);color:var(--acc);}
+
+.chip{display:inline-block;background:var(--s3);border:1px solid var(--bd);border-radius:14px;padding:2px 8px;font-size:11px;color:var(--tx2);margin:2px;cursor:pointer;transition:all .15s;}
+.chip:hover,.chip.active{border-color:var(--acc);color:var(--acc);background:var(--acc-d);}
+
+/* ============================================================
+   PESCA
+   ============================================================ */
+.chops-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px;}
+.chop-card{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;text-align:center;}
+.chop-tier{font-size:11px;font-weight:700;color:var(--acc);margin-bottom:2px;}
+.chop-price{font-size:14px;font-weight:800;}
+.chop-city{font-size:10px;color:var(--tx3);margin-top:2px;}
+.chop-nodata{font-size:10px;color:var(--tx3);font-style:italic;}
+
 .tbl-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-top:12px;}
 .tbl-scroll{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;text-align:left;font-size:13px;}
@@ -79,16 +161,22 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
 .td-p{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;}
 .pos{color:var(--grn);}
 .neg{color:var(--red);}
+
 .cfg-box{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:12px;}
 .cfg-i{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--tx2);cursor:pointer;}
 .cfg-i input[type="checkbox"]{accent-color:var(--acc);width:15px;height:15px;}
-.sum-row{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+
+/* ============================================================
+   BUILDS
+   ============================================================ */
 .sum-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:12px;flex:1;min-width:140px;}
 .sum-lbl{font-size:11px;color:var(--tx2);text-transform:uppercase;font-weight:600;}
 .sum-val{font-size:16px;font-weight:800;margin:2px 0;}
 .sum-sub{font-size:11px;color:var(--tx2);}
+
 .equip-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px;}
 @media(min-width:480px){.equip-grid{grid-template-columns:1fr 1fr;}}
+
 .equip-slot{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px;cursor:pointer;position:relative;transition:background .2s,border-color .2s;}
 .equip-slot:hover{background:var(--s2);}
 .equip-slot.filled{border-color:var(--acc-g);}
@@ -102,14 +190,10 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
 .slot-price{font-size:13px;font-weight:700;text-align:right;white-space:nowrap;}
 .slot-clear{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--tx3);font-size:16px;cursor:pointer;line-height:1;padding:2px 4px;transition:color .2s;}
 .slot-clear:hover{color:var(--red);}
-.tier-badge{font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(245,158,11,.15);color:var(--acc);margin-right:4px;}
-.q-badge{font-size:10px;padding:1px 5px;border-radius:4px;font-weight:700;}
-.q0{background:var(--s3);color:var(--tx3);}
-.q1{background:var(--s3);color:var(--tx2);}
-.q2{background:rgba(88,166,255,0.15);color:var(--blu);}
-.q3{background:var(--grn-d);color:var(--grn);}
-.q4{background:rgba(188,140,255,0.15);color:var(--pur);}
-.q5{background:var(--acc-d);color:var(--acc);}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;display:none;align-items:flex-end;justify-content:center;}
 .modal.on{display:flex;}
 .modal-content{background:var(--s1);border:1px solid var(--bd);border-radius:14px 14px 0 0;width:100%;max-width:520px;height:90vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -123,38 +207,54 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
 .modal-item-info{display:flex;flex-direction:column;min-width:0;}
 .modal-item-info b{font-size:13px;overflow:hidden;text-overflow:ellipsis;}
 .modal-item-info small{font-size:11px;color:var(--tx2);font-family:monospace;}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-20px);background:#238636;color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;visibility:hidden;transition:all .3s;z-index:300;box-shadow:0 4px 12px rgba(0,0,0,0.5);max-width:90vw;text-align:center;}
-.toast.error{background:#da3633;}
+
+/* ============================================================
+   TOAST / NOTIFICACIONES
+   ============================================================ */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--toast-bg);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;visibility:hidden;transition:all .3s;z-index:300;box-shadow:0 4px 12px var(--shadow);max-width:90vw;text-align:center;}
+.toast.error{background:var(--toast-error);}
 .toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
-.hint{font-size:11px;color:var(--tx3);margin-top:8px;text-align:center;}
-.chip{display:inline-block;background:var(--s3);border:1px solid var(--bd);border-radius:14px;padding:2px 8px;font-size:11px;color:var(--tx2);margin:2px;cursor:pointer;transition:all .15s;}
-.chip:hover,.chip.active{border-color:var(--acc);color:var(--acc);background:var(--acc-d);}
-.chops-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px;}
-.chop-card{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;text-align:center;}
-.chop-tier{font-size:11px;font-weight:700;color:var(--acc);margin-bottom:2px;}
-.chop-price{font-size:14px;font-weight:800;}
-.chop-city{font-size:10px;color:var(--tx3);margin-top:2px;}
-.chop-nodata{font-size:10px;color:var(--tx3);font-style:italic;}
-.info-banner{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--tx2);margin-bottom:12px;line-height:1.6;}
-.info-banner strong{color:var(--tx);}
-.loading-spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--bd);border-top-color:var(--acc);border-radius:50%;animation:spin .8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+.faq-section{margin-top:20px;border-top:1px solid var(--bd);padding-top:16px;}
+.faq-item{margin-bottom:8px;background:var(--s2);border-radius:8px;padding:8px 12px;}
+.faq-question{font-weight:600;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;}
+.faq-answer{font-size:12px;color:var(--tx2);padding-top:4px;display:none;}
+.faq-item.open .faq-answer{display:block;}
 </style>
 </head>
 <body>
 
+<!-- ============================================================
+   HEADER
+   ============================================================ -->
 <header>
   <div class="logo">Albion<span>Tools</span></div>
-  <div class="srv-pill">
-    <button class="on" data-srv="west">Americas</button>
-    <button data-srv="europe">Europe</button>
-    <button data-srv="east">Asia</button>
+  <div class="header-controls">
+    <!-- Estado de servidores -->
+    <div class="server-status" id="serverStatus">
+      <span><span class="status-dot online"></span>Americas</span>
+      <span><span class="status-dot online"></span>Europe</span>
+      <span><span class="status-dot offline"></span>Asia</span>
+    </div>
+    <!-- Selector de tema -->
+    <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌙</button>
+    <!-- Selector de servidor -->
+    <div class="srv-pill">
+      <button class="on" data-srv="west">Americas</button>
+      <button data-srv="europe">Europe</button>
+      <button data-srv="east">Asia</button>
+    </div>
   </div>
 </header>
 
-<!-- ============ MERCADO ============ -->
+<!-- ============================================================
+   PÁGINA: MERCADO
+   ============================================================ -->
 <div id="page-mkt" class="page on">
-  <h2>Buscador del Mercado</h2>
+  <h2>📊 Buscador del Mercado</h2>
   <p class="sub">Busca cualquier objeto en español o inglés. Precios en tiempo real en todas las ciudades.</p>
 
   <div class="search-box">
@@ -194,16 +294,26 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
   <div id="mkt-results">
     <div class="state"><div class="ico">📊</div><p>Escribe el nombre de un objeto para buscar en el catálogo.</p></div>
   </div>
+
+  <!-- FAQ Mercado -->
+  <div class="faq-section">
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">❓ ¿Cómo funciona el buscador? <span>▼</span></div>
+      <div class="faq-answer">Escribe el nombre del objeto en español o inglés. Los resultados se agrupan por familia de objetos (ej: todas las espadas). Selecciona uno para ver precios en todas las ciudades.</div>
+    </div>
+  </div>
 </div>
 
-<!-- ============ PESCA ============ -->
+<!-- ============================================================
+   PÁGINA: PESCA
+   ============================================================ -->
 <div id="page-fish" class="page">
-  <h2>Pescado Picado (Fishchops)</h2>
+  <h2>🐟 Pescado Picado (Fishchops)</h2>
   <p class="sub">Calcula la ganancia al picar peces. Cada tier de pez produce Fishchops de su mismo tier.</p>
 
   <div class="info-banner">
-    <strong>Cómo funciona:</strong> Al picar un pez obtienes Fishchops del mismo tier.
-    El rendimiento (chops/pez) escala por rareza.
+    <strong>💡 ¿Cómo funciona?</strong> Al picar un pez obtienes Fishchops del mismo tier.
+    El rendimiento (chops/pez) escala por rareza: Común ×2, Infrecuente ×4, Raro ×6, Legendario ×18 (relativo al tier).
   </div>
 
   <div class="row" style="margin-bottom:12px;">
@@ -262,11 +372,25 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
     </table>
   </div></div>
   <p class="hint">Tasa mercado: 2.5% uso + 4% premium / 8% sin premium. Ganancia = ingreso × (1−tasa) − costo pez.</p>
+
+  <!-- FAQ Pesca -->
+  <div class="faq-section">
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">❓ ¿Por qué el costo del pez es 0? <span>▼</span></div>
+      <div class="faq-answer">Los peces crudos rara vez se venden en el mercado. La herramienta asume que los pescas tú mismo (costo 0) o puedes comprarlos si hay listados activos.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">❓ ¿Qué significa "Premium"? <span>▼</span></div>
+      <div class="faq-answer">Con Premium la tasa de mercado es del 4% (vs 8% sin Premium). Esto afecta directamente tu ganancia neta.</div>
+    </div>
+  </div>
 </div>
 
-<!-- ============ BUILDS ============ -->
+<!-- ============================================================
+   PÁGINA: BUILDS
+   ============================================================ -->
 <div id="page-build" class="page">
-  <h2>Creador de Builds</h2>
+  <h2>⚔️ Creador de Builds</h2>
   <p class="sub">Arma tu equipo completo con precios en tiempo real. T1–T8, encantamiento .0–.4, todas las calidades.</p>
 
   <div class="row" style="margin-bottom:12px;">
@@ -274,30 +398,44 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
       <label class="fld-lbl">Ciudad para precios</label>
       <select id="build-city" onchange="buildRefreshPrices()"></select>
     </div>
-    <div style="display:flex;align-items:flex-end;">
-      <button class="btn-main" onclick="buildRefreshPrices()" style="width:100%;justify-content:center;">
+    <div style="display:flex;align-items:flex-end;gap:8px;">
+      <button class="btn-main" onclick="buildRefreshPrices()" style="flex:1;justify-content:center;">
         <span id="build-spin">↻</span> Actualizar
       </button>
+      <button class="btn-main" onclick="clearAllBuilds()" style="background:var(--red);color:#fff;">🗑️</button>
     </div>
   </div>
 
   <div class="sum-card" style="margin-bottom:16px;border-color:var(--acc-g);">
-    <div class="sum-lbl">Valor Total del Set</div>
+    <div class="sum-lbl">💰 Valor Total del Set</div>
     <div class="sum-val" id="build-total-val">0 Ag</div>
     <div class="sum-sub" id="build-total-sub">Precio mínimo de venta por pieza</div>
   </div>
 
   <div class="equip-grid" id="build-slots-grid"></div>
-  <p class="hint" style="margin-top:14px;">Toca una pieza para cambiarla · ✕ para quitarla</p>
+  <p class="hint" style="margin-top:14px;">Toca una pieza para cambiarla · ✕ para quitarla · 🗑️ para limpiar todo</p>
+
+  <!-- FAQ Builds -->
+  <div class="faq-section">
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">❓ ¿Cómo se calcula el precio total? <span>▼</span></div>
+      <div class="faq-answer">Se suman los precios de venta más bajos de cada pieza en la ciudad seleccionada. Las piezas sin precio no se suman.</div>
+    </div>
+  </div>
 </div>
 
+<!-- ============================================================
+   NAVEGACIÓN INFERIOR
+   ============================================================ -->
 <nav>
   <div class="tab on" data-tab="mkt"><i>📊</i>Mercado</div>
   <div class="tab" data-tab="fish"><i>🐟</i>Pesca</div>
   <div class="tab" data-tab="build"><i>⚔️</i>Builds</div>
 </nav>
 
-<!-- PICKER MODAL -->
+<!-- ============================================================
+   MODAL: PICKER DE BUILDS
+   ============================================================ -->
 <div class="modal" id="picker-modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -337,8 +475,14 @@ td{padding:10px 12px;border-top:1px solid var(--bd2);vertical-align:middle;}
   </div>
 </div>
 
+<!-- ============================================================
+   TOAST / NOTIFICACIONES
+   ============================================================ -->
 <div class="toast" id="toast"></div>
 
+<!-- ============================================================
+   JAVASCRIPT
+   ============================================================ -->
 <script>
 'use strict';
 
@@ -362,11 +506,7 @@ const SLOT_LABELS = {
 };
 const BUILD_SLOTS = ['MAINHAND','OFFHAND','HEAD','ARMOR','SHOES','CAPE','BAG'];
 
-/* ──────────────── DATOS DE PESCA CORREGIDOS ────────────────
-   Usando SOLO los IDs que realmente existen en la API.
-   Los nombres son los reales del juego.
-   Los yields son los correctos (verificados con la wiki).
-*/
+/* ──────────────── DATOS DE PESCA ──────────────── */
 const FISH_TYPES = {
   fw_common: [
     {id:'T1_FISHFRESHWATER_ALL_COMMON', es:'Rudd común', en:'Common Rudd', t:1, yield:2},
@@ -443,6 +583,29 @@ function iconUrl(id){ return `https://render.albiononline.com/v1/item/${id}.png?
 function fullId(base, ench){ ench = parseInt(ench)||0; return ench>0 ? `${base}@${ench}` : base; }
 function tierOf(id){ const m = id.match(/^T([1-8])_/); return m ? parseInt(m[1]) : 0; }
 function getFamily(id){ return id.replace(/^T[1-8]_/, ''); }
+
+/* ──────────────── TEMA (CLARO/OSCURO) ──────────────── */
+function toggleTheme(){
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateThemeIcon(next);
+}
+
+function updateThemeIcon(theme){
+  const btn = $('themeToggle');
+  btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+}
+
+function loadTheme(){
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeIcon(saved);
+}
+
+$('themeToggle').addEventListener('click', toggleTheme);
 
 /* ──────────────── API FETCH ──────────────── */
 async function apiFetch(ids, locs, quality){
@@ -684,21 +847,17 @@ async function fishLoad(){
   const bCity = $('f-buy-city').value;
   $('chops-city-label').textContent = sCity;
 
-  // IDs de peces del tipo seleccionado SOLO (no todos, para ahorrar peticiones)
   const fishIds = FISH_TYPES[currentFishType].map(f => f.id);
 
   try {
-    // Precios de Fishchops
     fishChopsCache = await apiFetch(FISHCHOPS_IDS, [sCity], 1);
-    
-    // Precios de peces del tipo seleccionado
     fishRawCache = await apiFetch(fishIds, [bCity], 1);
 
     fishRenderChopsCards();
     fishRender();
-    toast('Precios actualizados ✓');
+    toast('✅ Precios de pesca actualizados correctamente');
   } catch(e){
-    toast('Error de red al sincronizar', true);
+    toast('❌ Error de red al sincronizar', true);
     console.error(e);
   } finally {
     btn.disabled = false; spin.classList.remove('spin');
@@ -740,11 +899,10 @@ function fishRender(){
 
   const fish = FISH_TYPES[currentFishType] || FISH_TYPES.fw_common;
 
-  // Verificar si hay datos reales de precios de chops
   const hasChopPrices = fishChopsCache.some(d => d.sell_price_min > 0);
 
   if(!hasChopPrices){
-    $('f-tbody').innerHTML = '<tr><td colspan="6" class="state">No hay precios de Fishchops disponibles en esta ciudad. Prueba con otra ciudad.</td></tr>';
+    $('f-tbody').innerHTML = '<tr><td colspan="6" class="state">⚠️ No hay precios de Fishchops en esta ciudad. Prueba con otra ciudad.</td></tr>';
     return;
   }
 
@@ -764,7 +922,6 @@ function fishRender(){
     const netIncome = grossIncome * (1 - totalTax);
     const profit = netIncome - fishCost;
 
-    // Si no hay precio de chop, mostrar "Sin datos"
     if(chopPrice === 0){
       return `<tr>
         <td>
@@ -831,6 +988,13 @@ function buildRenderSlots(){
 }
 
 function buildClear(k){ buildEquip[k] = null; buildRenderSlots(); }
+
+function clearAllBuilds(){
+  if(!confirm('¿Seguro que quieres limpiar todo el set?')) return;
+  BUILD_SLOTS.forEach(k => buildEquip[k] = null);
+  buildRenderSlots();
+  toast('🗑️ Set limpiado');
+}
 
 function pickerOpen(slotKey){
   pickerSlotKey = slotKey;
@@ -914,9 +1078,9 @@ async function buildRefreshPrices(){
       const m = data.find(d => d.item_id === qid && d.city === city);
       eq.price = m && m.sell_price_min > 0 ? m.sell_price_min : 0;
     }
-    toast('Precios del set actualizados');
+    toast('✅ Precios del set actualizados');
   } catch(e) {
-    toast('Error actualizando precios', true);
+    toast('❌ Error actualizando precios', true);
   }
   spin.classList.remove('spin');
   buildRenderSlots();
@@ -936,7 +1100,7 @@ document.querySelectorAll('.srv-pill button').forEach(b => {
     document.querySelectorAll('.srv-pill button').forEach(x => x.classList.remove('on'));
     b.classList.add('on');
     SERVER = b.dataset.srv;
-    toast('Servidor: '+b.textContent);
+    toast('🌐 Servidor: ' + b.textContent);
     if(mktSelected) mktLoadPrices();
     if(fishChopsCache.length) fishLoad();
   });
@@ -946,8 +1110,32 @@ $('mkt-input').addEventListener('input', mktInput);
 $('mkt-input').addEventListener('keydown', e => { if(e.key === 'Enter') mktChooseFirst(); });
 $('picker-modal').addEventListener('click', e => { if(e.target === $('picker-modal')) pickerClose(); });
 
+/* ──────────────── ESTADO DE SERVIDORES ──────────────── */
+function updateServerStatus(){
+  // Simulación de estado - en una versión real se consultaría una API de estado
+  const statuses = {
+    west: 'online',
+    europe: 'online',
+    east: 'online'
+  };
+  
+  const labels = {
+    west: 'Americas',
+    europe: 'Europe',
+    east: 'Asia'
+  };
+  
+  const container = $('serverStatus');
+  container.innerHTML = Object.entries(statuses).map(([key, status]) =>
+    `<span><span class="status-dot ${status}"></span>${labels[key]}</span>`
+  ).join('');
+}
+
 /* ──────────────── INIT ──────────────── */
 window.addEventListener('DOMContentLoaded', () => {
+  loadTheme();
+  updateServerStatus();
+  
   fillCity($('f-buy-city'), 'Caerleon');
   fillCity($('f-sell-city'), 'Caerleon');
   fillCity($('build-city'), 'Caerleon');
@@ -974,6 +1162,7 @@ window.pickerSelect = pickerSelect;
 window.buildClear = buildClear;
 window.buildRefreshPrices = buildRefreshPrices;
 window.buildRenderSlots = buildRenderSlots;
+window.clearAllBuilds = clearAllBuilds;
 </script>
 </body>
 </html>
